@@ -1,0 +1,7 @@
+{
+  "Revenue.DIY": {
+    "type": "http",
+    "url": "https://mcp.revenue.diy/mcp",
+    "alwaysLoad": true
+  }
+}

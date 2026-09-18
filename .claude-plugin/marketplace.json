@@ -1,0 +1,19 @@
+{
+  "name": "revenue-diy",
+  "owner": {
+    "name": "Revenue.DIY",
+    "email": "support@revenue.diy",
+    "url": "https://revenue.diy"
+  },
+  "metadata": {
+    "description": "The Revenue.DIY plugin marketplace."
+  },
+  "plugins": [
+    {
+      "name": "revenue-diy",
+      "source": "./",
+      "displayName": "Revenue.DIY",
+      "description": "Revenue.DIY plugin with sales, marketing, and operations skills and agents for B2B revenue teams."
+    }
+  ]
+}

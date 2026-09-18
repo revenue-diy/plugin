@@ -1,0 +1,3 @@
+# Transient working files (scratch, generated artefacts).
+# Convention: .temp/<YYYY-MM-DD>_<task>/ so everything stays organised and dated.
+.temp/

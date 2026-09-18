@@ -1,0 +1,25 @@
+{
+  "description": "Revenue.DIY plugin hooks. Two reinforcement jobs, no telemetry: the client greeting and the stale-version nag. Skill invocation is NOT a hook job - it rides the skill catalogue descriptions (skill-push removed 2026-08-10).",
+  "hooks": {
+    "SessionStart": [
+      {
+        "hooks": [
+          {
+            "type": "command",
+            "command": "node -e \"const p=require('path'),o=require('os');let r=process.env.CLAUDE_PLUGIN_ROOT;if(o.platform()==='win32'&&r&&r.length>2&&r[0]==='/'&&r[2]==='/'&&/[a-zA-Z]/.test(r[1]))r=r[1].toUpperCase()+':'+r.slice(2);try{require(p.join(r,'hooks','session.js')).sessionStart(r)}catch(e){}\""
+          }
+        ]
+      }
+    ],
+    "MessageDisplay": [
+      {
+        "hooks": [
+          {
+            "type": "command",
+            "command": "node -e \"const p=require('path'),o=require('os');let r=process.env.CLAUDE_PLUGIN_ROOT;if(o.platform()==='win32'&&r&&r.length>2&&r[0]==='/'&&r[2]==='/'&&/[a-zA-Z]/.test(r[1]))r=r[1].toUpperCase()+':'+r.slice(2);try{require(p.join(r,'hooks','session.js')).messageDisplay()}catch(e){}\""
+          }
+        ]
+      }
+    ]
+  }
+}
