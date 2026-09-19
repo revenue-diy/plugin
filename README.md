@@ -1,31 +1,18 @@
 # Revenue.DIY Plugin
 
-Revenue skills and specialist agents for your AI, plus the connector that lets them read your own business context – so your AI can do real revenue work instead of guessing.
+Revenue skills and specialist agents for your AI, from [revenue.diy](https://revenue.diy).
 
-Two things make it work, and they are separate:
-
-- **The plugin** – this repository – gives your AI the skills and the agents. It is free, and it is the whole thing you install.
-- **The connector** gives those skills your business: positioning, ICP, offering, brand voice, messaging. That context is not in this repository and never will be. It is served by Revenue.DIY to the account it belongs to.
-
-Install the plugin and you get the skills. Add the connector and the skills know who you are.
-
----
+Install the plugin and your AI gets the skills. Add the **Revenue.DIY connector** and the skills work from your own business context – positioning, ICP, offering, brand voice, messaging. That context is served by the connector to the account it belongs to; none of it is stored in this repository.
 
 ## Get set up
 
-**[revenue.diy/install-guide](https://revenue.diy/install-guide)**
-
-Covers every route: Claude on the web, Claude Desktop and Cowork, Claude Code on the command line and in VS Code, Claude Code on the web, and the one-time setup an admin does on a Claude Team or Enterprise plan. It also covers switching the connector on, and setting it up by hand if it does not appear.
+**[revenue.diy/install-guide](https://revenue.diy/install-guide)** – every surface (Claude on the web, Desktop, Cowork, Claude Code in the terminal, in VS Code and on the web, and the one-time admin setup on a Claude Team or Enterprise plan), plus switching the connector on.
 
 ## Keep it current
 
-**[revenue.diy/updating-plugin](https://revenue.diy/updating-plugin)**
+**[revenue.diy/updating-plugin](https://revenue.diy/updating-plugin)** – automatic updates are off until you turn them on; this guide shows the switch on each surface and how to update by hand.
 
-New versions ship regularly and **automatic updates are off until you turn them on**. That guide shows where the switch is on each surface, how to update by hand, and what to do when a version refuses to move.
-
-Both links are permanent. They always point at the current instructions, which is why the steps are not repeated here – a README cannot be corrected without a release, and instructions on a moving product go stale.
-
----
+Both links are permanent and always point at the current instructions, so the steps are not repeated here.
 
 ## What is in here
 
@@ -34,29 +21,17 @@ Both links are permanent. They always point at the current instructions, which i
 .mcp.json         the Revenue.DIY connector declaration
 agents/           specialist agents (auto-discovered)
 skills/           workflow skills (auto-discovered)
-hooks/            the session-start version check, which tells you when this copy is behind
+hooks/            the session-start version check
 CHANGELOG.md      what changed in each release
 ```
 
-**Your business context is not in here, and no business's is.** This repository holds skills, agents and configuration – nothing else. Context is held per account, served by the connector, and reaches only the account that owns it.
+The skills follow the `SKILL.md` standard and the connector is a standard MCP server, so most of this travels to other AI tools.
 
-The skills run without the connector. They will ask you for the facts they need instead of knowing them.
+## Help
 
-Using something other than Claude? The skills follow the `SKILL.md` standard, and the connector is a standard MCP server, so most of this travels.
+**support@revenue.diy** – installation, issues, feature requests, anything account-specific. Or say "report a bug" in any session and the AI drafts the report for you.
 
----
-
-## Issues
-
-**Bugs and feature requests: open an Issue on this repository.** That is what Issues here are for, and what gets read.
-
-Please do not put business detail, customer names or anything confidential in an Issue – it is a public tracker. For anything account-specific, email **support@revenue.diy** instead.
-
-Pull requests are not accepted: this repository is published from an upstream baseline, so anything merged here would be overwritten by the next release. Open an Issue and it gets fixed at the source.
-
-Or say "report a bug" in any session and the AI drafts the report for you.
-
----
+This repository is published from an upstream baseline: changes made here are overwritten by the next release, so send fixes to support rather than as pull requests.
 
 ## Licence
 

@@ -1,6 +1,6 @@
 # DEBUGGING WORKFLOW
 
-> **Version 1.2** | 2026-09-15
+> **Version 1.3** | 2026-09-19
 
 Loaded by `engineering` when a task IS a bug (`fix` mode – the DESIGN research core) or when checks fail mid-build (EXECUTE/REVIEW). Evidence before hypothesis, cheapest tool first.
 
@@ -40,7 +40,7 @@ Form the hypothesis FROM the evidence, then confirm it with one targeted check. 
 
 ### 4. Fix & Verify
 
-- *IF running as `fix`-mode DESIGN research* → STOP here: report root cause + WHY it broke + proposed fix to the user (they may redirect); the fix lands via `§ STEP 3: EXECUTE`.
+- *IF running as `fix`-mode DESIGN research* → STOP here: report root cause + WHY it broke + proposed fix to the user (they may redirect); the fix lands via `SKILL.md § STEP 3: EXECUTE`.
 - *ELSE (mid-build entry)* → implement the minimal targeted fix, RE-RUN the exact failing check, then check the blast radius – what else uses this code path?
 
 ---

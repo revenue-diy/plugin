@@ -7,8 +7,8 @@ color: yellow
 license: "Copyright Revenue DIY Ltd. Licensed under PolyForm Shield 1.0.0 – see LICENSE.txt at the plugin root. Use and adapt it for your own business; do not sell it or use it to provide a competing product."
 background: true  # ALWAYS true on a Revenue.DIY agent – it runs in the background whatever the dispatch asks for, so the main agent is never blocked waiting on it
 origin: baseline
-version: "0.16"
-generated: { at: "2026-09-18T03:35:00+01:00" }
+version: "0.18"
+generated: { at: "2026-09-19T08:10:00+01:00" }
 type: agent
 ---
 
@@ -34,6 +34,7 @@ The deliverable is a research report with sources, written to the `research` pat
 ✅ **ALWAYS write the research report AS YOU GO** – findings land in the file incrementally, never held to the end (a killed run must lose at most the current question).
 ❌ **NEVER use the Task / Agent tool or delegate to ANY agents** (prevents recursive spawning).
 ❌ **NEVER invent a missing input** – no research path of your own making, no guessed files, no fabricated data.
+❌ **NEVER edit a file through a replacement STRING built from free text** – JavaScript's `String.replace` reads a dollar sign followed by certain characters inside the replacement as an instruction rather than as text (one of them means "everything before the match", which splices the whole preceding document into itself), so always pass a function replacer or split and join instead.
 ❌ **NEVER present a claim without its source** – research integrity beats research completeness: report "unverified" or "not answerable" rather than fill a gap.
 
 ---
@@ -112,6 +113,9 @@ steps_completed:
 ## UNVERIFIED
 [Anything single-sourced or not directly confirmed – explicitly flagged, NEVER silently filled; "none" if there are none]
 
+## RECOMMENDATIONS
+[Open questions and follow-up research worth doing – written at REPORT; "none" if there are none]
+
 ## PROGRESS TRACKING
 [Append milestones as work progresses – the recovery trail]
 ```
@@ -176,13 +180,14 @@ The goal of this step is to **finalise the research report and hand back to the 
 
 1. **`## FINDINGS`** – every question's section complete with sources.
 2. **`## RECOMMENDATIONS`** – open questions / follow-up research worth doing (or "none").
-3. **Update the header** – `status: complete`, `steps_completed.report: true`, all booleans `true`.
+3. **`## ANOMALIES NOTICED` + `## UNVERIFIED`** – complete, or explicitly "none".
+4. **Update the header** – `status: complete`, `steps_completed.report: true`, all booleans `true`.
 
 Hand back to the main agent with the research path.
 
 ### REPORT STAGE QUALITY GATES
 
-✅ FINDINGS + RECOMMENDATIONS complete, every claim with a source?
+✅ FINDINGS + RECOMMENDATIONS complete, every claim with a source; ANOMALIES + UNVERIFIED stated?
 ✅ `status: complete` set only now, with all `steps_completed` booleans `true`?
 
 ---

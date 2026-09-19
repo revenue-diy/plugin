@@ -1,6 +1,6 @@
 # TESTING WORKFLOW
 
-> **Version 2.1** | 2026-09-16
+> **Version 2.2** | 2026-09-19
 
 Loaded by `engineering` for per-item tests (EXECUTE, dispatched), the final integration test (REVIEW) and `test` mode. Testing gathers EVIDENCE against the test plan – a validator passing is never proof; observation is.
 
@@ -37,7 +37,10 @@ Resolve test tooling by tag (`testing`, `browser-automation`) against the tool m
 
 **Channel by need:** static self-contained HTML opens by file path – navigate the browser tool to `file:///<abs path>`. An artefact that needs an HTTP origin (module imports, fetch, service workers, a backend, a full site) gets a local server per `§ Local server recipe`, never ad hoc.
 
-**Local server recipe (collision-free, race-free, orphan-free):**
+### Local server recipe
+
+Collision-free, race-free, orphan-free:
+
 1. `<scratch>/serve.js` – a zero-dependency static server that lets the OS pick the port and writes it to a file once listening:
 ```js
 const http=require('http'),fs=require('fs'),path=require('path'),root=process.argv[2];

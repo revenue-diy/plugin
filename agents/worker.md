@@ -5,8 +5,8 @@ color: orange
 license: "Copyright Revenue DIY Ltd. Licensed under PolyForm Shield 1.0.0 – see LICENSE.txt at the plugin root. Use and adapt it for your own business; do not sell it or use it to provide a competing product."
 background: true  # ALWAYS true on a Revenue.DIY agent – it runs in the background whatever the dispatch asks for, so the main agent is never blocked waiting on it
 origin: baseline
-version: "0.17"
-generated: { at: "2026-09-18T03:35:00+01:00" }
+version: "0.19"
+generated: { at: "2026-09-19T08:10:00+01:00" }
 type: agent
 ---
 
@@ -32,6 +32,7 @@ The deliverable is the briefed unit of work written to its target location, plus
 ✅ **ALWAYS write the progress report AS YOU GO** – findings + progress land in the file incrementally, never held to the end (a killed run must lose at most the current sub-task).
 ❌ **NEVER use the Task / Agent tool or delegate to ANY agents** (prevents recursive spawning).
 ❌ **NEVER invent a missing input** – no progress path of your own making, no guessed files, no fabricated data.
+❌ **NEVER edit a file through a replacement STRING built from free text** – JavaScript's `String.replace` reads a dollar sign followed by certain characters inside the replacement as an instruction rather than as text (one of them means "everything before the match", which splices the whole preceding document into itself), so always pass a function replacer or split and join instead.
 ❌ **NEVER work outside the brief's boundaries** – no files, sections or targets beyond the dispatched unit.
 
 ---
@@ -112,6 +113,9 @@ steps_completed:
 ## UNVERIFIED
 [Anything claimed but not directly confirmed – explicitly flagged, NEVER silently filled; "none" if there are none]
 
+## RECOMMENDATIONS
+[Top follow-ups by impact – written at REPORT; "none" if there are none]
+
 ## PROGRESS TRACKING
 [Append milestones as work progresses – the recovery trail]
 ```
@@ -169,13 +173,14 @@ The goal of this step is to **finalise the progress report and hand back to the 
 
 1. **`## FINDINGS`** – Produced / Decisions / Deviations complete, each claim with evidence.
 2. **`## RECOMMENDATIONS`** – top follow-ups by impact (or "none").
-3. **Update the header** – `status: complete`, `steps_completed.report: true`, all booleans `true`.
+3. **`## ANOMALIES NOTICED` + `## UNVERIFIED`** – complete, or explicitly "none".
+4. **Update the header** – `status: complete`, `steps_completed.report: true`, all booleans `true`.
 
 Hand back to the main agent with the progress path.
 
 ### REPORT STAGE QUALITY GATES
 
-✅ FINDINGS + RECOMMENDATIONS complete, every claim with evidence?
+✅ FINDINGS + RECOMMENDATIONS complete, every claim with evidence; ANOMALIES + UNVERIFIED stated?
 ✅ `status: complete` set only now, with all `steps_completed` booleans `true`?
 
 ---

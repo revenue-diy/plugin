@@ -3,8 +3,8 @@ name: connector
 description: The Revenue.DIY connector steps every skill shares – read one section at a time, only where a skill's stub names it.
 origin: baseline
 license: "Copyright Revenue DIY Ltd. Licensed under PolyForm Shield 1.0.0 – see LICENSE.txt in this folder. Use and adapt it for your own business; do not sell it or use it to provide a competing product."
-version: "1.3"
-generated: { at: "2026-09-18T21:00:00+01:00" }
+version: "1.5"
+generated: { at: "2026-09-19T01:55:00+01:00" }
 type: skill-doc
 ---
 
@@ -37,7 +37,7 @@ Run at the skill's PLAN step, before the plan is approved.
 
 *IF ABSENT* → print "Skipping the work-log and documentation conventions check – the Revenue.DIY MCP is not connected." and plan with no work log. Record `worklog: none`.
 
-*IF PRESENT* → ONE call: `{"skill": "<skill-name>", "files": ["OPERATIONS.md", "operations_work-log.md"]}` (add `operations_documentation.md` only when the task authors or edits documents). A missing `operations_work-log.md`, or a convention that does not cover this repo or task, means no work-log convention – record `worklog: none` and skip logging. *ELSE* → record `worklog: required`; the convention it states is the contract for the rest of the session: at PLAN create the work-log item with the brief as its body and put its reference in the brief's `log:` field; at EXECUTE and REVIEW log what it names; at WRAP-UP close it, commit and push exactly as it rules. Every report the session produces reaches the item through `§ LOG`, at the phase that produced it – never in one batch at the end.
+*IF PRESENT* → ONE call: `{"skill": "<skill-name>", "files": ["OPERATIONS.md", "operations_work-log.md"]}` (add `operations_documentation.md` only when the task authors or edits documents). Then ONE test, on facts, recorded: *IF `operations_work-log.md` did not return, OR its stated scope names neither this repository nor this task type* → record `worklog: none` and write which of the two applied into brief `§ PLAN`. *ELSE* → record `worklog: required`, and the convention it states is the contract for the rest of the session: at PLAN create the work-log item with the brief as its body and put its reference in the brief's `log:` field; at EXECUTE and REVIEW log what it names; at WRAP-UP close it, commit and push exactly as it rules. Every report the session produces reaches the item through `§ LOG`, at each `§ LOG` stub this skill's tier carries and at the phase that produced it, never in one batch at the end; a light skill carries no stub and logs nothing – it creates the item at PLAN and closes it at WRAP-UP, and posts no report.
 
 `worklog: required | none` is written to the brief frontmatter beside `connector:` HERE, once, and is never re-decided. It is what every `§ LOG` call reads.
 
@@ -45,18 +45,18 @@ Run at the skill's PLAN step, before the plan is approved.
 
 ## LOG
 
-Run wherever a skill's `LOG(<files>)` stub names it. `<n>` is the work-log reference in the brief's `log:` field.
+Run wherever a skill's stub names it, for the files that stub names. `<n>` is the work-log reference in the brief's `log:` field.
 
 *IF `worklog: none`* → print "Skipping the report log – no work-log convention applies to this task." ONCE in the session, then continue. No `logged:` line is required anywhere.
 
+*IF `worklog: pending`* (`§ CONVENTIONS` has not run yet, so no work-log item exists) → record nothing and post nothing; these files log at the first `§ LOG` call after `log:` is set, and nothing is dropped.
+
 *IF `worklog: required`* → FOR EACH file, in the order given:
 
-1. **Skip what is already logged** – *IF brief `§ PROGRESS TRACKING` already carries a `logged: <file> →` line* → do nothing for that file. The step is idempotent: a re-run posts nothing twice.
-2. **Build the body** – copy the file to `<scratch>/log_<file name>` with ONE header line first: `<work item or phase> – <file name>`. *IF the body exceeds 60,000 characters* (the platform rejects a comment over 65,536) → split it at a heading boundary into `<k>` parts, each repeating the header with ` (part <i> of <k>)`.
+1. **Skip what is already logged** – *IF brief `§ PROGRESS TRACKING` already carries a `logged: <file> →` line* → do nothing for that file. The step is idempotent: a re-run posts nothing twice. A named file that does not exist on disk is skipped silently – it was never produced.
+2. **Build the body** – copy the file to `<scratch>/log_<file name>` with ONE header line first: `<work item or phase> – <file name>`. *IF the body exceeds 60,000 characters* (the platform rejects a comment over 65,536) → split it into `<k>` parts at the last heading boundary that falls inside the budget, or at a line boundary where no heading does, each part repeating the header with ` (part <i> of <k>)`.
 3. **Post it** – ONE comment per body, parts in order: `gh issue comment <n> --repo <owner>/<repo> --body-file <body>`.
-4. **Record it** – append `logged: <file> → <comment url>` to brief `§ PROGRESS TRACKING`, one line per file (a split file records its first part's url). *IF you edit the brief with code* → use a function replacer or split and join, never a replacement string built from free text.
-
-*IF the work-log item does not exist yet* (research read before PLAN created it) → those files log at the first `§ LOG` call after `log:` is set; nothing is dropped.
+4. **Record it** – append a `logged: <file> → <comment url>` entry to brief `§ PROGRESS TRACKING` – as its own line or as a list item under a dated block – one per file (a split file records its first part's url). *IF you edit the brief with code* → use a function replacer or split and join, never a replacement string built from free text.
 
 A report that exists only in the session's scratch folder is not logged.
 
@@ -64,7 +64,7 @@ A report that exists only in the session's scratch folder is not logged.
 
 ## CLOSE
 
-Run at the skill's WRAP-UP, after documentation is final and BEFORE the report is written.
+Run at the skill's WRAP-UP, after documentation is final and the final report has been logged, and BEFORE the report is delivered to the user.
 
 *IF ABSENT* → print "Skipping the compounding knowledge step – the Revenue.DIY MCP is not connected." The session ends on the report; no dialog follows.
 
