@@ -5,8 +5,8 @@ color: purple
 license: "Copyright Revenue DIY Ltd. Licensed under PolyForm Shield 1.0.0 – see LICENSE.txt at the plugin root. Use and adapt it for your own business; do not sell it or use it to provide a competing product."
 background: true  # ALWAYS true on a Revenue.DIY agent – it runs in the background whatever the dispatch asks for, so the main agent is never blocked waiting on it
 origin: baseline
-version: "0.20"
-generated: { at: "2026-09-19T12:05:00+01:00" }
+version: "0.21"
+generated: { at: "2026-09-22T10:34:30+01:00" }
 type: agent
 ---
 
@@ -67,7 +67,7 @@ The goal of this step is to **load the bar and the context the judgement rests o
 
 **The dispatch carries the bar** – the `rubric` and `references` are self-contained by contract. Judge from them first.
 
-**Business context, SCOPED:** this agent inherits the fork's tools deliberately, so `get_context` is available – call it ONLY when the rubric names brand or business criteria you genuinely cannot judge from the dispatch (e.g. "on-brand voice", "fits the ICP"), naming exactly those files by bare filename. Do NOT pass `skill` or `log` – those markers belong to the main thread's skill run, never to an agent's read. A rubric that is fully judgeable from the dispatch gets NO context call: a pull you do not need is tokens spent diluting the judgement.
+**Business context, SCOPED:** this agent inherits the fork's tools deliberately, so `get_context` is available – call it ONLY when the rubric names brand or business criteria you genuinely cannot judge from the dispatch (e.g. "on-brand voice", "fits the ICP"), naming exactly those files by bare filename. Do NOT pass `skill` or `start` – those markers belong to the main thread's skill run, never to an agent's read. A rubric that is fully judgeable from the dispatch gets NO context call: a pull you do not need is tokens spent diluting the judgement.
 
 THEN read every `rubric` file IN FULL (they ARE the bar), THEN every `references` file.
 

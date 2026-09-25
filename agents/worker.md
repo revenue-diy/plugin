@@ -5,8 +5,8 @@ color: orange
 license: "Copyright Revenue DIY Ltd. Licensed under PolyForm Shield 1.0.0 – see LICENSE.txt at the plugin root. Use and adapt it for your own business; do not sell it or use it to provide a competing product."
 background: true  # ALWAYS true on a Revenue.DIY agent – it runs in the background whatever the dispatch asks for, so the main agent is never blocked waiting on it
 origin: baseline
-version: "0.19"
-generated: { at: "2026-09-19T08:10:00+01:00" }
+version: "0.20"
+generated: { at: "2026-09-22T10:34:30+01:00" }
 type: agent
 ---
 
@@ -64,7 +64,7 @@ The goal of this step is to **ground the work in what the dispatch carries**.
 
 **The dispatch IS the context source.** The `task` brief is self-contained by contract: the work, its boundaries, the verbatim decision text it implements, its acceptance criteria, and – when the dispatching skill judged the unit needs it – a labelled `context:` block carrying the business facts that matter (brand voice, ICP, principles). `references` carries the rest. An ABSENT `context:` block means the dispatcher judged none is needed – it is never something to fix.
 
-**Do NOT go hunting.** This agent inherits the fork's tools, so `get_context` may be available – but a dispatched unit is scoped work, and pulling whole pillars to "check" costs tokens and dilutes the brief. Call it ONLY when the briefed work genuinely cannot be produced without a business fact the dispatch failed to carry, and name exactly the files you need. Do NOT pass `skill` or `log` – those markers belong to the main thread's skill run, never to an agent's read. Everything else you need is in `task` and `references`.
+**Do NOT go hunting.** This agent inherits the fork's tools, so `get_context` may be available – but a dispatched unit is scoped work, and pulling whole pillars to "check" costs tokens and dilutes the brief. Call it ONLY when the briefed work genuinely cannot be produced without a business fact the dispatch failed to carry, and name exactly the files you need. Do NOT pass `skill` or `start` – those markers belong to the main thread's skill run, never to an agent's read. Everything else you need is in `task` and `references`.
 
 THEN read every `references` file in full.
 
