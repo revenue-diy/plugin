@@ -4,6 +4,40 @@ What changed in each release of the Revenue.DIY plugin.
 
 ---
 
+## [v0.28.0] – 2026-09-30 – baseline sync (v0.28.0)
+
+What changed in baseline v0.28:
+
+### v0.28.0
+
+### Highlights
+
+Sessions start lighter: the plugin no longer runs a version check when a session opens, and the Revenue.DIY tools now load when a task needs them. Rating a skill at the end of a session is now one simple step.
+
+### Changed
+
+- Skill ratings you give at the end of a session now go through a dedicated rating step
+- Choosing "Other" at the end of a skill now sends your note as feedback on that skill
+- The Revenue.DIY tools load when a task needs them instead of at the start of every session
+
+### Removed
+
+- The start-of-session version check
+
+Revenue.DIY plugin system testing:
+✅ Release checks on the baseline - PASS
+
+
+---
+
+
+
+Revenue.DIY plugin system testing:
+✅ Claude Code CLI - PASS
+✅ Release checks on this repository (baseline v0.28.0) - PASS
+
+---
+
 ## [v0.27.0] – 2026-09-25 – baseline sync (v0.27.0)
 
 Your plugin is up to date again – every improvement from v0.25 to v0.27, in one release
