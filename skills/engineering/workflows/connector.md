@@ -3,8 +3,8 @@ name: connector
 description: The Revenue.DIY connector steps every skill shares – read one section at a time, only where a skill's stub names it.
 origin: baseline
 license: "Copyright Revenue DIY Ltd. Licensed under PolyForm Shield 1.0.0 – see LICENSE.txt in this folder. Use and adapt it for your own business; do not sell it or use it to provide a competing product."
-version: "1.7"
-generated: { at: "2026-09-22T12:10:00+01:00" }
+version: "1.8"
+generated: { at: "2026-09-30T18:38:29+01:00" }
 type: skill-doc
 ---
 
@@ -20,7 +20,7 @@ This file is the CANONICAL copy, synced into `workflows/connector.md` in every s
 
 Run ONCE, at the skill's STEP 0, after the brief exists.
 
-**The connector is PRESENT when `get_context` is in your tools.** *IF it is not listed* → it may be deferred or still connecting – two attempts, then stop: (1) `ToolSearch` for `select:get_context`; (2) *IF still missing* → do the next task step, then retry once. Only after both attempts fail is it ABSENT. Record `connector: present | absent` in the brief frontmatter – later stubs read it and never re-detect.
+**The connector is PRESENT when `get_context` is in your tools.** *IF it is not listed* → it may be deferred or still connecting – two attempts, then stop: (1) search for it with your tool-search tool (`ToolSearch`, `tool_search`), the query the bare name `get_context`; (2) *IF still missing* → do the next task step, then retry once. Only after both attempts fail is it ABSENT. Record `connector: present | absent` in the brief frontmatter – later stubs read it and never re-detect.
 
 *IF PRESENT* → call `get_context` NOW: `{"skill": "<skill-name>", "start": true, "files": [<the skill's staple files, PRINCIPLES.md always first>]}`. `start: true` fires ONCE per session, on this call – later fetches carry `skill` and `files`, never `start`. `skill` and `start` are telemetry only; they decide nothing about what returns.
 
@@ -72,4 +72,4 @@ Run at the skill's WRAP-UP, after documentation is final and the final report ha
 1. **Close the run** – ONE call, never conditional: `{"skill": "<skill-name>", "files": ["OPERATIONS.md", "operations_work-log.md", <every module a candidate below would land in>]}` – a read like any other, carrying no `start`. Follow the work-log convention for WRAP-UP.
 2. **Sweep silently** – candidates are facts from this session that pass the capture rule the Revenue.DIY MCP states in its instructions and `submit_context` description, and were NOT already saved mid-session. Drop any fact the returned modules already hold. Never anything personal or sensitive, never a preference of one user.
 3. **Ask, after the report** – in the SAME message as the report text, ONE `AskUserQuestion`: one single-select question per candidate (at most three, by value) – *"Save to the context system? – <the fact, in the user's words>"* with options **Save** / **Skip** (the free-text "Other" is the user's own version, filed verbatim) – and, ALWAYS LAST, *"Skill rating: how did `<skill-name>` do this session?"* with **Good (⭐⭐⭐⭐)** / **OK (⭐⭐⭐)** / **Meh (⭐⭐)** / **Bad (⭐)**.
-4. **Route the answers** – every Save in ONE `submit_context` call: `{"skill": "<skill-name>", "changes": [{"file": "<the module the index names>", "add": "<the fact>"}]}` – read the index (`get_context` with `{"skill": "<skill-name>", "files": ["index"]}`) when unsure of the module. A rating → `send_feedback` `{"skill": "<skill-name>", "rating": 4|3|2|1}`. A skill problem written under "Other" → `send_feedback` `{"skill": "<skill-name>", "content": "<their words verbatim>", "bug": true}` when something is technically broken, without `bug` otherwise. A reply meaning no → nothing forwarded. NEVER re-ask. `skill` on `send_feedback` and `submit_context` attributes the call to the skill and counts no session; only the opening `get_context` call carrying `start: true` counts one.
+4. **Route the answers** – every Save in ONE `submit_context` call: `{"skill": "<skill-name>", "changes": [{"file": "<the module the index names>", "add": "<the fact>"}]}` – read the index (`get_context` with `{"skill": "<skill-name>", "files": ["index"]}`) when unsure of the module. A rating → `rate_skill` with `<skill-name>` and the rating – *IF `rate_skill` is not in your tools* → search for it first, as § DETECT does, the query the bare name `rate_skill`. A skill problem written under "Other" → `send_feedback` `{"skill": "<skill-name>", "feedback": "<their words verbatim>", "bug": true | false}` – `bug` true when something is technically broken, false otherwise. A reply meaning no → nothing forwarded. NEVER re-ask. `skill` on `rate_skill`, `send_feedback` and `submit_context` attributes the call to the skill and counts no session; only the opening `get_context` call carrying `start: true` counts one.

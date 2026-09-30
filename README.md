@@ -21,7 +21,6 @@ Both links are permanent and always point at the current instructions, so the st
 .mcp.json         the Revenue.DIY connector declaration
 agents/           specialist agents (auto-discovered)
 skills/           workflow skills (auto-discovered)
-hooks/            the session-start version check
 CHANGELOG.md      what changed in each release
 ```
 
