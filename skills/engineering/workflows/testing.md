@@ -1,6 +1,6 @@
 # TESTING WORKFLOW
 
-> **Version 2.2** | 2026-09-19
+> **Version 2.3** | 2026-10-03
 
 Loaded by `engineering` for per-item tests (EXECUTE, dispatched), the final integration test (REVIEW) and `test` mode. Testing gathers EVIDENCE against the test plan – a validator passing is never proof; observation is.
 
@@ -61,7 +61,7 @@ srv.listen(0,'127.0.0.1',()=>{fs.writeFileSync(path.join(__dirname,'serve.port')
 
 ### Dispatched runs (default – per-item and final)
 
-Write the scenarios to `<scratch>/scenarios_<scope>.md` (each case: pre-conditions, steps, expected observation, cleanup). DISPATCH `revenue-diy:tester` (sonnet) – **`Tester (sonnet): run <scope> scenarios`** – with `{progress:[<scratch>/test_<scope>.md], scenarios:[<scratch>/scenarios_<scope>.md], conventions:[the testing conventions doc, if the connector named one], references:[brief.md]}`. Browser scenarios go in ONE dispatch run serially; scriptable cases split freely.
+Write the scenarios to `<scratch>/scenarios_<scope>.md` (each case: pre-conditions, steps, expected observation, cleanup). DISPATCH `revenue-diy:tester` (sonnet) – **`Tester (sonnet): run <scope> scenarios`** – with `{progress:[<scratch>/test_<scope>.md], scenarios:[<scratch>/scenarios_<scope>.md], conventions:[a repo or project testing-conventions document, if one exists – never a context module], context_files:[the context module carrying the testing conventions, if the index lists one], references:[brief.md]}`. Browser scenarios go in ONE dispatch run serially; scriptable cases split freely.
 
 **Then YOU read the evidence** – every verdict against its captured observation. "Worked as expected" is a FAIL to re-run. FAIL findings → fix main-thread (or a `worker`), RE-DISPATCH with the same progress path (the tester resumes the unrun scenarios).
 

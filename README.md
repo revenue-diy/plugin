@@ -6,13 +6,9 @@ Install the plugin and your AI gets the skills. Add the **Revenue.DIY connector*
 
 ## Get set up
 
-**[revenue.diy/install-guide](https://revenue.diy/install-guide)** – every surface (Claude on the web, Desktop, Cowork, Claude Code in the terminal, in VS Code and on the web, and the one-time admin setup on a Claude Team or Enterprise plan), plus switching the connector on.
+**[revenue.diy/install-guide](https://revenue.diy/install-guide)** – connect the Revenue.DIY MCP and install the plugin on every Claude plan and app, including the one-time admin setup on a Claude Team or Enterprise plan.
 
-## Keep it current
-
-**[revenue.diy/updating-plugin](https://revenue.diy/updating-plugin)** – automatic updates are off until you turn them on; this guide shows the switch on each surface and how to update by hand.
-
-Both links are permanent and always point at the current instructions, so the steps are not repeated here.
+The link is permanent and always points at the current instructions, so the steps are not repeated here.
 
 ## What is in here
 
