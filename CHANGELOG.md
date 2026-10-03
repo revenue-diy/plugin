@@ -4,6 +4,54 @@ What changed in each release of the Revenue.DIY plugin.
 
 ---
 
+## [v0.30.0] – 2026-10-03 – baseline sync (v0.30.0)
+
+Your plugin is up to date again – every improvement from v0.28 to v0.30, in one release
+
+These are the baseline updates released since your last one – this release brings you all of them at once:
+
+### v0.29.0
+
+### Highlights
+
+Agents now read how your business runs before they start a task, so the work they hand back follows your tools and ways of working from the first step. Without the Revenue.DIY connector they work from the task alone, as before.
+
+### Changed
+
+- The worker, reviewer and tester agents read the operations part of your business context at the start of every task, plus any further part a skill names for them – the engineering skill names your engineering and testing conventions
+- The README points straight to the install guide
+
+Revenue.DIY plugin system testing:
+✅ Release checks on the baseline - PASS
+
+
+---
+
+### v0.30.0
+
+### Highlights
+
+Agents now read how your business runs before they start a task, so the work they hand back follows your tools and ways of working from the first step. This release carries that change, first cut as v0.29.0, to every install.
+
+### Changed
+
+- The worker, reviewer and tester agents read the operations part of your business context at the start of every task, plus any further part a skill names for them – the engineering skill names your engineering and testing conventions
+- The README points straight to the install guide
+
+Revenue.DIY plugin system testing:
+✅ Release checks on the baseline - PASS
+
+
+---
+
+
+
+Revenue.DIY plugin system testing:
+✅ Claude Code CLI - PASS
+✅ Release checks on this repository (baseline v0.30.0) - PASS
+
+---
+
 ## [v0.28.0] – 2026-09-30 – baseline sync (v0.28.0)
 
 What changed in baseline v0.28:
