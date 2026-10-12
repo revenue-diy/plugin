@@ -4,6 +4,45 @@ What changed in each release of the Revenue.DIY plugin.
 
 ---
 
+## [v0.31.0] – 2026-10-12 – baseline sync (v0.31.0)
+
+What changed in baseline v0.31:
+
+### v0.31.0
+
+### Highlights
+Every skill now shares the same design, planning, review and wrap-up steps, so work is planned, checked and closed the same way everywhere. The engineering skill is rebuilt on this shape, and the four helper agents follow one clear contract.
+
+### Added
+- Added shared design, planning, review and wrap-up steps to every skill.
+- Added a planning step that asks a few short questions about models, order, reviews and testing before work starts, or lets the session do small work itself.
+- Added an acceptance checklist to every build: each item is ticked with its proof at review, and an open item stops the wrap-up.
+- Added a check after a usage limit or a restart: the session checks what is still running before it carries on.
+
+### Changed
+- Changed the engineering skill to plan work in phases, run independent phases side by side, send each fix back to the helper that built it, and review and test each phase.
+- Changed the engineering skill so it is picked up for coding, infrastructure, automation and integration work, as well as the builds it already covered.
+- Changed the four helpers (worker, researcher, reviewer, tester) to one contract: a brief, a one-line task and an output file, three outcomes (done, done with concerns, blocked) and short reports.
+- Changed the researcher so it can read local files and your connected tools, read-only, and can never run commands or change anything.
+- Changed the helpers so a missing business-context connection never counts as a problem.
+
+### Fixed
+- Fixed review findings being saved for later: findings within the work are now fixed before it closes.
+
+Revenue.DIY plugin system testing:
+✅ Release checks on the baseline - PASS
+
+
+---
+
+
+
+Revenue.DIY plugin system testing:
+✅ Claude Code CLI - PASS
+✅ Release checks on this repository (baseline v0.31.0) - PASS
+
+---
+
 ## [v0.30.0] – 2026-10-03 – baseline sync (v0.30.0)
 
 Your plugin is up to date again – every improvement from v0.28 to v0.30, in one release
