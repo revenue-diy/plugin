@@ -5,8 +5,8 @@ job: Act as the command-centre for an active account – pull its status across 
 status: planned
 origin: baseline
 license: "Copyright Revenue DIY Ltd. Licensed under PolyForm Shield 1.0.0 – see LICENSE.txt in this folder. Use and adapt it for your own business; do not sell it or use it to provide a competing product."
-version: "0.7"
-generated: { at: "2026-09-16T09:05:00.000Z" }
+version: "0.8"
+generated: { at: "2026-10-08T17:33:34+01:00" }
 type: skill
 ---
 
@@ -14,4 +14,4 @@ type: skill
 
 PRE-REGISTERED STUB – not yet built. Tell the user this skill is coming soon and offer the closest live skill instead.
 
-- PRD: `rdiy-hq/build-list/baseline-skills/07-managing-accounts.md`
+- Build issue: https://github.com/revenue-diy/rdiy-hq/issues/1212

@@ -3,8 +3,8 @@ name: connector
 description: The Revenue.DIY connector steps every skill shares – read one section at a time, only where a skill's stub names it.
 origin: baseline
 license: "Copyright Revenue DIY Ltd. Licensed under PolyForm Shield 1.0.0 – see LICENSE.txt in this folder. Use and adapt it for your own business; do not sell it or use it to provide a competing product."
-version: "1.8"
-generated: { at: "2026-09-30T18:38:29+01:00" }
+version: "1.10"
+generated: { at: "2026-10-07T18:44:14+01:00" }
 type: skill-doc
 ---
 
@@ -37,7 +37,12 @@ Run at the skill's PLAN step, before the plan is approved.
 
 *IF ABSENT* → print "Skipping the work-log and documentation conventions check – the Revenue.DIY MCP is not connected." and plan with no work log. Record `worklog: none`.
 
-*IF PRESENT* → ONE call: `{"skill": "<skill-name>", "files": ["OPERATIONS.md", "operations_work-log.md"]}` (add `operations_documentation.md` only when the task authors or edits documents). Then ONE test, on facts, recorded: *IF `operations_work-log.md` did not return, OR its stated scope names neither this repository nor this task type* → record `worklog: none` and write which of the two applied into brief `§ PLAN`. *ELSE* → record `worklog: required`, and the convention it states is the contract for the rest of the session: at PLAN create the work-log item with the brief as its body and put its reference in the brief's `log:` field; at EXECUTE and REVIEW log what it names; at WRAP-UP close it, commit and push exactly as it rules. Every report the session produces reaches the item through `§ LOG`, at each `§ LOG` stub this skill's tier carries and at the phase that produced it, never in one batch at the end; a light skill carries no stub and logs nothing – it creates the item at PLAN and closes it at WRAP-UP, and posts no report.
+*IF PRESENT* → ONE call: `{"skill": "<skill-name>", "files": ["OPERATIONS.md", "operations_work-log.md"]}` (add `operations_documentation.md` only when the task authors or edits documents). Then ONE test, on facts, recorded: *IF `operations_work-log.md` did not return, OR its stated scope names neither this repository nor this task type* → record `worklog: none` and write which of the two applied into brief `§ PLAN`. *ELSE* → record `worklog: required`, and the convention it states is the contract for the rest of the session:
+- **PLAN** – create the work-log item with the brief's sections as its body, or adopt the item the task started from, and put its reference in the brief's `log:` field. *IF the convention makes the item the record* (no local brief) → from then on the sections live in the item body only, and `brief.md` keeps its frontmatter: the resume state.
+- **EXECUTE and REVIEW** – log what it names, through `§ LOG`, at each `§ LOG` stub this skill's tier carries and at the phase that produced it, never in one batch at the end. *IF the convention names which reports reach the item* → only those are posted, and `§ LOG` records the rest as kept local; *ELSE* → every report the session produces reaches the item.
+- **WRAP-UP** – close it, commit and push exactly as it rules – never while an acceptance criterion is still open: the item then stays open and says what is open.
+
+A light skill carries no stub and logs nothing – it creates or adopts the item at PLAN and closes it at WRAP-UP, and posts no report.
 
 `worklog: required | none` is written to the brief frontmatter beside `connector:` HERE, once, and is never re-decided. It is what every `§ LOG` call reads.
 
@@ -54,11 +59,12 @@ Run wherever a skill's stub names it, for the files that stub names. `<n>` is th
 *IF `worklog: required`* → FOR EACH file, in the order given:
 
 1. **Skip what is already logged** – *IF brief `§ PROGRESS TRACKING` already carries a `logged: <file> →` line* → do nothing for that file. The step is idempotent: a re-run posts nothing twice. A named file that does not exist on disk is skipped silently – it was never produced.
-2. **Build the body** – copy the file to `<scratch>/log_<file name>` with ONE header line first: `<work item or phase> – <file name>`. *IF the body exceeds 60,000 characters* (the platform rejects a comment over 65,536) → split it into `<k>` parts at the last heading boundary that falls inside the budget, or at a line boundary where no heading does, each part repeating the header with ` (part <i> of <k>)`.
-3. **Post it** – ONE comment per body, parts in order: `gh issue comment <n> --repo <owner>/<repo> --body-file <body>`.
-4. **Record it** – append a `logged: <file> → <comment url>` entry to brief `§ PROGRESS TRACKING` – as its own line or as a list item under a dated block – one per file (a split file records its first part's url). *IF you edit the brief with code* → use a function replacer or split and join, never a replacement string built from free text.
+2. **Keep local what the convention does not post** – *IF the convention names which reports reach the item AND this file is not one of them* → append `logged: <file> → <the item's url> (kept local – convention)` to brief `§ PROGRESS TRACKING`, post nothing, and go to the next file.
+3. **Build the body** – copy the file to `<scratch>/log_<file name>` with ONE header line first: `<work item or phase> – <file name>`. *IF the body exceeds 60,000 characters* (work logs commonly refuse one entry over 65,536) → split it into `<k>` parts at the last heading boundary that falls inside the budget, or at a line boundary where no heading does, each part repeating the header with ` (part <i> of <k>)`.
+4. **Post it** – ONE entry per body on the work-log item `<n>`, parts in order, with the command or tool the convention names.
+5. **Record it** – append a `logged: <file> → <entry url>` entry to brief `§ PROGRESS TRACKING` – as its own line or as a list item under a dated block – one per file (a split file records its first part's url). *IF you edit the brief with code* → use a function replacer or split and join, never a replacement string built from free text.
 
-A report that exists only in the session's scratch folder is not logged.
+A report that exists only in the session's scratch folder, with no `logged:` line, is not logged.
 
 ---
 

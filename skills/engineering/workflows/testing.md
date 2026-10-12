@@ -1,22 +1,25 @@
 # TESTING WORKFLOW
 
-> **Version 2.3** | 2026-10-03
+> **Version 2.6** | 2026-10-12
 
-Loaded by `engineering` for per-item tests (EXECUTE, dispatched), the final integration test (REVIEW) and `test` mode. Testing gathers EVIDENCE against the test plan – a validator passing is never proof; observation is.
+Loaded by `engineering` for per-phase tests (EXECUTE, dispatched), the end-to-end test (REVIEW) and `test` mode. Testing gathers EVIDENCE against the test plan – a validator passing is never proof; observation is.
 
-**YOU ARE THE TEST-DRIVER.** Four rules govern every run:
-1. **Testers RUN, the main agent JUDGES** – scenario execution dispatches to `revenue-diy:tester` (sonnet); the verdict is never theirs.
+**YOU ARE THE TEST-DRIVER.** Five rules govern every run:
+1. **Testers RUN, the main agent JUDGES** – scenario execution dispatches to `revenue-diy:tester`; the verdict is never theirs.
 2. **NEVER accept a pass claim without the observed output** – a reported PASS is a claim; read the captured observation. A verdict without its observation is a FAIL.
 3. **Lane by tooling** – browser scenarios run in ONE serial lane (one session, closed between scenarios); scriptable checks, validators and HTTP probes run in parallel.
 4. **Every guard is SHOWN to fail** – seed the violation it exists to catch, watch it fail, restore. A guard proven only by passing is unproven.
+5. **Test only finished work** – never a half-done migration or a change still partly applied: finish it, then test it end to end. A per-phase test runs only on a phase complete on its own; a phase that is one part of a larger change waits for the end-to-end test.
 
 ---
 
 ## 1. DERIVE THE TEST CASES
 
-From the locked test plan (or the `test`-mode scope), each case is **action → expected observation**, in priority order: happy path; failure paths (bad input, empty state, the thing it talks to being down); edge cases the design named; integration seams (data crossing item or system boundaries). Scale to risk: a static lead magnet needs a render and click-through; a form with a webhook needs failure paths and the far side of the seam.
+From the locked test plan (or the `test`-mode scope), each case is **action → expected observation**, in priority order: happy path; failure paths (bad input, empty state, the thing it talks to being down); edge cases the design named; integration seams (data crossing item or system boundaries). Scale to risk and to the change: test what the change touches – its path, its failure cases, the seams it crosses – never a sweep of untouched areas unless the conventions call for one. A static lead magnet needs a render and click-through; a form with a webhook needs failure paths and the far side of the seam.
 
 **Automations** add: the trigger fires on the real event shape; the ACTIVE version is the one edited (an MCP edit can sit as a draft); the user-error path is retryable and the system-error path alerts a human; idempotency on a duplicate event.
+
+**Out-of-date tests** – a test the change makes out of date is updated as part of the work, without asking. Only an update that WEAKENS a check (a case dropped, an assertion loosened, a guard removed) goes to the user first.
 
 ---
 
@@ -26,10 +29,12 @@ Resolve test tooling by tag (`testing`, `browser-automation`) against the tool m
 
 | Situation | Runner |
 |---|---|
-| Per-item test during EXECUTE | DISPATCH `revenue-diy:tester` – `§ Dispatched runs` |
-| Final integration test at REVIEW | DISPATCH the runs; YOU read every evidence file and own the verdict |
+| Per-phase test during EXECUTE | DISPATCH `revenue-diy:tester` – `§ Dispatched runs` |
+| End-to-end test at REVIEW | DISPATCH the runs; YOU read every evidence file and own the verdict |
 | No testing tool configured | MAIN THREAD `§ Manual walkthrough` – the user's observations are the evidence |
 | Scriptable checks (validators, unit tests, HTTP) | either – cheapest first, before browser work |
+
+**Use what exists** – tests and evaluations run on the test infrastructure already in place (its runner, accounts and logins), never on a parallel harness or a separate test identity built beside it.
 
 **Why `tester`:** a test run is observation without repair. The tester's contract forbids fixing anything and forbids editing a scenario – a scenario that needed correcting is a finding, and the re-run after the fix earns the PASS. `worker` PRODUCES (a rig, a harness, a fix); `reviewer` JUDGES an artefact; `researcher` never runs tests.
 
@@ -59,15 +64,15 @@ srv.listen(0,'127.0.0.1',()=>{fs.writeFileSync(path.join(__dirname,'serve.port')
 
 ## 3. EXECUTE THE TESTS
 
-### Dispatched runs (default – per-item and final)
+### Dispatched runs (default – per-phase and end to end)
 
-Write the scenarios to `<scratch>/scenarios_<scope>.md` (each case: pre-conditions, steps, expected observation, cleanup). DISPATCH `revenue-diy:tester` (sonnet) – **`Tester (sonnet): run <scope> scenarios`** – with `{progress:[<scratch>/test_<scope>.md], scenarios:[<scratch>/scenarios_<scope>.md], conventions:[a repo or project testing-conventions document, if one exists – never a context module], context_files:[the context module carrying the testing conventions, if the index lists one], references:[brief.md]}`. Browser scenarios go in ONE dispatch run serially; scriptable cases split freely.
+Write the scenarios to `<scratch>/scenarios_<scope>.md` (each case: pre-conditions, steps, expected observation, cleanup). DISPATCH `revenue-diy:tester` under the announce string the calling step names, with the `brief`, `task` and `progress` it names, plus `scenarios:[<scratch>/scenarios_<scope>.md]`, `conventions:[a repo or project testing-conventions document, if one exists – never a context module]` and `context_files:[the context module carrying the testing conventions, if the index lists one]`. Browser scenarios go in ONE dispatch run serially; scriptable cases split freely.
 
-**Then YOU read the evidence** – every verdict against its captured observation. "Worked as expected" is a FAIL to re-run. FAIL findings → fix main-thread (or a `worker`), RE-DISPATCH with the same progress path (the tester resumes the unrun scenarios).
+**Then YOU read the evidence** – every verdict against its captured observation. "Worked as expected" is a FAIL to re-run. FAIL findings → back to the SAME worker that built the item, resumed by you so it fixes with the context it holds (a new `worker` only when the fix will not fit in the room left in it; main-thread work is fixed main-thread); then re-run the failed cases with a NEW `progress` path (`<scope>_test_<k>`), never over a finished report. A run killed mid-way is re-dispatched on its SAME path, and the tester resumes the unrun scenarios.
 
 ### Main-thread runs
 
-For a case too small or too entangled to brief: perform the action, capture the observation, mark PASS / FAIL vs the expected observation. A FAIL → `workflows/debugging.md`, fix, re-run the case and every case on the same path.
+For a case too small or too entangled to brief: perform the action, capture the observation, mark PASS / FAIL vs the expected observation. A FAIL → find its root cause, fix it, re-run the case and every case on the same path.
 
 ### Guard proof (mandatory where the artefact has guards)
 

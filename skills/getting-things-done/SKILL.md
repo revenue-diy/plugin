@@ -6,8 +6,8 @@ tier: standard
 status: built
 origin: baseline
 license: "Copyright Revenue DIY Ltd. Licensed under PolyForm Shield 1.0.0 – see LICENSE.txt in this folder. Use and adapt it for your own business; do not sell it or use it to provide a competing product."
-version: "3.40"
-generated: { at: "2026-09-19T14:25:00+01:00" }
+version: "3.42"
+generated: { at: "2026-10-07T18:44:14+01:00" }
 type: skill
 ---
 
@@ -65,11 +65,13 @@ progress: {}         # one flat boolean per work item, added at PLAN – no roll
 ## REVIEW RESULTS
 ```
 
+**One shape, two homes.** The six sections are the same wherever the brief lives – the work log per the conventions, or a local `brief.md` as the fallback: same headings, same order, so every step below reads and writes them the same way in either home. *IF the task starts from an existing work-log item* → its body is the brief's starting point: put its reference in `log:` and take its acceptance criteria as the brief's. `workflows/connector.md § CONVENTIONS` decides at PLAN which home holds the sections from then on; `brief.md` always keeps the frontmatter – the resume state.
+
 **Brief rules:**
 1. `steps` and `progress` change status only – never renamed, never deleted.
 2. A STEP closes with its status flip and a 2–3 sentence progress report to the user (what landed, what's next) – the ONE sanctioned break in the no-commentary rule.
 3. *IF a task-list tool is in your tools (`TodoWrite` or the `TaskCreate` family)* → mirror the six STEPs and, from PLAN, the work items – nothing finer. Never search for it, block on it or mention it to the user.
-4. *IF context compresses or the session restarts* → READ the brief and continue from the first step or work item not completed.
+4. *IF context compresses or the session restarts* → READ the brief – `brief.md`, and the work-log item's body where that holds the sections – and continue from the first step or work item not completed.
 5. `§ AGENDA` is the interview's tracker – one row per open design topic, opened at `§ INTERVIEW THE USER` and kept live until WRAP-UP:
 
     | # | topic | class | depends on | status |
@@ -99,7 +101,7 @@ Goal: **full alignment on every `design input`**. Facilitate the user's thinking
 | **Worth-doing check** | MUST-HAVE | pressure-test the value against the business's goals – recommend SKIP or a cheaper version when it doesn't earn the time |
 | **Runtime inputs** | MUST-HAVE | what the task reads (context modules, user files, prior outputs), the tools it needs (by tag against the tool map, degrade gracefully), what to ask for |
 | **Output** | MUST-HAVE | what is produced and where it lands – direct via tool > file in project > response block |
-| **Acceptance criteria** | MUST-HAVE | what "good" looks like for THIS task – the review bar |
+| **Acceptance criteria** | MUST-HAVE | what "good" looks like for THIS task, one provable line each – the checklist the review ticks at `§ STEP 4: REVIEW` |
 | **Constraints** | NICE-TO-HAVE | boundaries, budget, tone, deadline |
 
 `MUST-HAVE` = the design is incomplete without it. `NICE-TO-HAVE` = a default is acceptable.
@@ -180,9 +182,11 @@ Build the array, then ONE `AskUserQuestion`; *IF empty* → skip; *IF the user s
 
 ### 2.3 WRITE THE PLAN
 
-Fill brief `§ PLAN` (items, tooling table, preferences), `§ WHAT-NOT-TO-DO` (exclusions with D-IDs; close with: anything not covered by a decision or this plan is out of scope – raise it, don't build it), one `progress:` key per item.
+**The acceptance checklist comes first.** `§ PLAN` opens with the acceptance criteria, numbered, one provable line each: `- [ ] A<n> <criterion>`. `§ STEP 4: REVIEW` ticks it item by item: `- [x] A<n> <criterion> – <proof>` (an observation – output, a file and line, a link that opens, a quote – never "done") or `- [ ] A<n> <criterion> – OPEN: <what is missing>`, closed by `Verdict: all <n> met` or `Verdict: <m> of <n> open`.
 
-*IF `simple task`* → the plan is one line in `§ PLAN`; confirm it in prose and GO to `§ STEP 3: EXECUTE` when the user agrees.
+Fill brief `§ PLAN` (the acceptance checklist, then items, tooling table, preferences), `§ WHAT-NOT-TO-DO` (exclusions with D-IDs; close with: anything not covered by a decision or this plan is out of scope – raise it, don't build it), one `progress:` key per item.
+
+*IF `simple task`* → the plan is one line in `§ PLAN`, under the acceptance checklist; confirm both in prose and GO to `§ STEP 3: EXECUTE` when the user agrees.
 
 ### 2.4 GET APPROVAL
 
@@ -198,9 +202,9 @@ A go-ahead given BEFORE the plan existed is direction, not approval. Loop until 
 
 ✅ Tooling table in the brief, missing tools surfaced?
 ✅ Conventions read per `workflows/connector.md § CONVENTIONS`; the connector-absent skip line printed as message text where it applies; `worklog:` decided; `log:` set where a convention applies?
-✅ Items sequenced with `progress:` keys; `§ WHAT-NOT-TO-DO` present (or `simple task`)?
+✅ The acceptance checklist opens `§ PLAN`, every item provable; items sequenced with `progress:` keys; `§ WHAT-NOT-TO-DO` present (or `simple task`: the checklist and the one-line plan)?
 ✅ Every `§ AGENDA` D-ID present in `§ PLAN` or `§ WHAT-NOT-TO-DO`?
-✅ The summary block was printed as message text BEFORE the approval question, and approval was given on it (or `simple task`: the one-line plan confirmed in prose)?
+✅ The summary block was printed as message text BEFORE the approval question, and approval was given on it (or `simple task`: the checklist and the one-line plan confirmed in prose)?
 
 ---
 
@@ -247,21 +251,24 @@ Goal: **prove the output meets every acceptance line**. Cheaper checks first; ne
 2. **Quality** – **anti-workslop** – does it say something the intended reader needs?; every acceptance line passes with evidence.
 
 *IF a check fails* → trivial → fix and re-run; else → GO back to `§ STEP 3: EXECUTE`, fix, re-run this STEP.
-*IF `simple task`* → self-check only; SKIP to `§ STEP 5: WRAP-UP`.
+*IF `simple task`* → self-check, then tick the acceptance checklist yourself, item by item, with its proof, and deliver it with the output – the user is the independent check; SKIP to `§ STEP 5: WRAP-UP`.
 
 ### 4.2 INDEPENDENT REVIEW
 
-*IF `Final independent review` is selected* → dispatch ONE `revenue-diy:reviewer` – **`Reviewer (<model>): <output>`** – model per preference (sonnet default), `{target:[artefacts], rubric:[assets/checklist.md + brief acceptance lines (+ another skill's checklist by stable path when the output clearly belongs to its domain)], references:[brief.md], review:[<scratch>/review_final.md]}`. *IF `Per-item review` ran* → this pass is about the seams rather than the pieces. *IF no independent review was selected* → say so at WRAP-UP, so the user knows what the output was and was not judged by.
+**The final review ticks the acceptance checklist** – ONE per review pass: every item, one by one, in the format `§ WRITE THE PLAN` sets; an unticked item is a P1. The final independent review writes it; *IF no independent review was selected* → your own integrated review writes it.
 
-**Route findings** (P1 blocks · P2 should fix · P3 nice): wrong or missing runtime inputs → fix, re-run; impeaches a locked input → STOP and report; P1/P2 → fix, re-run this STEP; P3 → trivial fix or report at WRAP-UP. Log every review in brief `§ REVIEW RESULTS` with `F<n>` IDs and verdicts.
+*IF `Final independent review` is selected* → dispatch ONE `revenue-diy:reviewer` – **`Reviewer (<model>): <output>`** – model per preference (sonnet default), `{target:[artefacts], rubric:[assets/checklist.md + the acceptance checklist and its tick format, verbatim (+ another skill's checklist by stable path when the output clearly belongs to its domain)], references:[brief.md, and the work-log item's body where that holds the sections], review:[<scratch>/review_final.md]}`; a re-run writes `review_final_<k>.md`, never over a finished review. *IF `Per-item review` ran* → this pass is about the seams rather than the pieces. *IF no independent review was selected* → say so at WRAP-UP, so the user knows what the output was and was not judged by.
 
-Write your own integrated review to `<scratch>/review_integrated.md`, then READ `workflows/connector.md § LOG` and follow it for that file and `<scratch>/review_final.md` – here, where they are written, not at WRAP-UP.
+**Route findings** (P1 blocks · P2 should fix · P3 nice): wrong or missing runtime inputs → fix, re-run; impeaches a locked input → STOP and report; P1/P2 → fix, re-run this STEP; P3 → trivial fix or report at WRAP-UP; a finding outside this work's acceptance → a follow-up, named in the report and filed per the work-log convention, never left only in a review file. Log every review in brief `§ REVIEW RESULTS` with `F<n>` IDs and verdicts.
+
+When the routing closes, write your own integrated review to `<scratch>/review_integrated.md`, then READ `workflows/connector.md § LOG` and follow it for that file and every `<scratch>/review_final*.md`, the last pass last – here, where they are written, not at WRAP-UP.
 
 ### REVIEW STAGE QUALITY GATES
 
 ✅ Self-checks pass, decision table built?
 ✅ Independent review passed (or `simple task`)?
 ✅ Every finding fixed, re-verified and logged, every review report `logged:` (*IF `worklog: required`*)?
+✅ The last pass's acceptance checklist covers every item, each ticked with its proof or named as open?
 
 ---
 
@@ -273,12 +280,12 @@ Goal: **hand off, close the run, capture what should outlive the session.** Runs
 
 1. Finish documentation per the conventions read at PLAN; *IF it touches more than 2 files* → `revenue-diy:worker` (sonnet).
 2. **Log the final report and sweep** – write the `§ REPORT TO USER` text to `<scratch>/final_summary.md`, READ `workflows/connector.md § LOG` and follow it for that file and for every other report in `<scratch>` still without a `logged:` line; THEN VERIFY: every `*.md` report in `<scratch>` carries a `logged: <file> → <url>` line in brief `§ PROGRESS TRACKING`; post any that do not, and record the result in `§ PROGRESS TRACKING` as `sweep: <n> reports, <m> posted now, 0 missing`. *IF `worklog: required`* → closing with one missing is a gate failure.
-3. Brief `status: completed`.
+3. **An open item stops the wrap-up** – *IF the last acceptance checklist has an open item* → fix what can be fixed now (GO back to `§ STEP 3: EXECUTE`); whatever is still open is named in the report and on the work-log item, which stays open, and the brief stays `in_progress`. *ELSE* → brief `status: completed`.
 4. READ `workflows/connector.md § CLOSE`; run steps 1–2 now, silently.
 
 ### 5.2 REPORT TO USER
 
-One message: **work done** (highlights, issues) · **review results** (verdicts, fix loops) · **output** (links) · **follow-ups** (P3s, improvements, open questions).
+One message: **work done** (highlights, problems) · **review results** (verdicts, fix loops, the acceptance checklist's verdict) · **output** (links) · **follow-ups** (open acceptance items first; P3s, improvements, open questions).
 
 ### 5.3 FEEDBACK
 
@@ -286,7 +293,7 @@ In the SAME message, after the report text, run `workflows/connector.md § CLOSE
 
 ### WRAP-UP STAGE QUALITY GATES
 
-✅ Brief `completed`; work log closed per the convention?
+✅ Brief `completed` – or `in_progress` with every open acceptance item named; work log closed per the convention, or left open?
 ✅ Every `*.md` report in `<scratch>` carrying a `logged:` line, the sweep result recorded in `§ PROGRESS TRACKING` as `sweep: <n> reports, <m> posted now, 0 missing` (*IF `worklog: required`*)?
 ✅ Report delivered BEFORE any dialog?
 ✅ `workflows/connector.md § CLOSE` run in full (present) or its skip line printed (absent)?

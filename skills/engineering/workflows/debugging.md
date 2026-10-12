@@ -1,6 +1,6 @@
 # DEBUGGING WORKFLOW
 
-> **Version 1.3** | 2026-09-19
+> **Version 1.4** | 2026-10-12
 
 Loaded by `engineering` when a task IS a bug (`fix` mode – the DESIGN research core) or when checks fail mid-build (EXECUTE/REVIEW). Evidence before hypothesis, cheapest tool first.
 
@@ -31,7 +31,7 @@ Loaded by `engineering` when a task IS a bug (`fix` mode – the DESIGN research
 Climb the ladder only as far as needed; resolve tools by tag against the tool map, or from what the user named:
 
 1. **Error output + logs already in hand** – read what you have before generating more.
-2. **Code inspection** – Read/Grep the failing path; most bugs are visible in code once isolated.
+2. **Code inspection** – read and search the failing path; most bugs are visible in code once isolated.
 3. **Runtime observation** – browser console/network via a `testing` / `browser-automation`-tagged tool; no tooling → guide the user through their browser DevTools (Console, Network) and capture what they see.
 4. **Platform/server logs** – locations per the engineering conventions the connector points at; no access → ask the user to pull them. An automation platform's execution log is the primary record for a workflow bug – read the failed execution before the code.
 5. **Interactive probing** – targeted debug logging or live probes (REMOVE after; never leave debug artefacts).
@@ -40,7 +40,7 @@ Form the hypothesis FROM the evidence, then confirm it with one targeted check. 
 
 ### 4. Fix & Verify
 
-- *IF running as `fix`-mode DESIGN research* → STOP here: report root cause + WHY it broke + proposed fix to the user (they may redirect); the fix lands via `SKILL.md § STEP 3: EXECUTE`.
+- *IF running as `fix`-mode DESIGN research* → STOP here: report root cause + WHY it broke + proposed fix to the user (they may redirect); the fix lands at the skill's EXECUTE step.
 - *ELSE (mid-build entry)* → implement the minimal targeted fix, RE-RUN the exact failing check, then check the blast radius – what else uses this code path?
 
 ---

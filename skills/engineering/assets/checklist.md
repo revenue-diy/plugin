@@ -1,14 +1,15 @@
 # ENGINEERING REVIEW CHECKLIST
 
-> **Version 1.5** | 2026-09-16
+> **Version 1.9** | 2026-10-12
 
-Rubric for `reviewer` dispatches from `engineering`. The dispatch brief states WHICH section applies (code or artefact review / testing review / final sweep) – score every line in the named section(s) with evidence; tier findings P1 (blocks ship) / P2 (should fix) / P3 (nice-to-have).
+Rubric for `reviewer` dispatches from `engineering`. The sub-brief's Review section, or the dispatch's rubric, states WHICH section applies (code or artefact review / testing review / final sweep); at the final review, the acceptance checklist and its tick format come with it – score every line in the named section(s) with evidence; tier findings P1 (blocks ship) / P2 (should fix) / P3 (nice-to-have).
 
 ---
 
 ## CODE / ARTEFACT REVIEW (per item or chunk)
 
 - [ ] **Does what the brief says** – behaviour matches the item's acceptance lines; no silent scope drift.
+- [ ] **Simplest thing that works** – nothing the acceptance lines don't need (no extra mechanism, option, abstraction or tooling) unless what breaks without it is named and likely; a one-off uses what already exists.
 - [ ] **Standards compliance** – follows the standards named in the dispatch (the engineering conventions the connector points at / repo rules); review against THOSE, never generic best-practice memory.
 - [ ] **Automation hygiene** *(workflows and integrations)* – the ACTIVE version is the edited one (no unpublished draft); separate workflows unless triggers share downstream logic; happy, user-error and system-error paths each wired; idempotent on a duplicate event; no credential or instance ID in the artefact.
 - [ ] **Security basics** – inputs validated/sanitised, outputs escaped, no secrets/keys/credentials in the artefact, no unsafe third-party calls.
@@ -23,10 +24,10 @@ Rubric for `reviewer` dispatches from `engineering`. The dispatch brief states W
 
 ## TESTING REVIEW (test plan + evidence)
 
-- [ ] **Coverage matches the build** – every acceptance criterion has at least one test case; failure paths and named edge cases are covered, not just the happy path.
+- [ ] **Coverage matches the build** – every acceptance criterion has at least one test case; failure paths and named edge cases are covered, not just the happy path. Tests the change made out of date are updated; an update that weakens a check carries the user's approval.
 - [ ] **Evidence is real** – each PASS cites a concrete observation (output, screenshot, log), never an assertion; environment stated.
 - [ ] **Results prove the criteria** – the passing cases actually demonstrate the acceptance criteria, not adjacent behaviour.
-- [ ] **Gaps declared** – anything untested is explicitly listed with a reason; re-run any scriptable checks via Bash to confirm they still pass.
+- [ ] **Gaps declared** – anything untested is explicitly listed with a reason; re-run any scriptable checks in the shell to confirm they still pass.
 - [ ] **Guards proven, not assumed** – every guard, validator or error path the build introduces was SHOWN to fail on a seeded violation and then restored; both observations are in the evidence file. A guard evidenced only by passing runs is untested. Evidence: quote the tripped + restored observations (or name the guard that has none).
 - [ ] **Verdicts rest on observed output** – no case passes on a runner's claim alone: each PASS is backed by the observation captured at the time, and browser-lane cases ran serially in one session, closed after use. Evidence: quote one captured observation per lane.
 
@@ -35,4 +36,3 @@ Rubric for `reviewer` dispatches from `engineering`. The dispatch brief states W
 - [ ] **Items integrate** – seams between items and modules carry data correctly; no orphaned or duplicated logic across chunks.
 - [ ] **Consistency** – naming, patterns and error handling are uniform across the whole (per-item reviews can't see this).
 - [ ] **Documentation complete** – what it does, how it's built, how to run/host it, how to change it – accurate against the final state.
-- [ ] **Acceptance criteria, whole-artefact** – every line from the task brief passes against the INTEGRATED result with evidence.

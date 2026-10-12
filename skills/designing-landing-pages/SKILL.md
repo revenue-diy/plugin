@@ -5,8 +5,8 @@ job: Work the page wireframe and conversion architecture with the user, produce 
 status: planned
 origin: baseline
 license: "Copyright Revenue DIY Ltd. Licensed under PolyForm Shield 1.0.0 – see LICENSE.txt in this folder. Use and adapt it for your own business; do not sell it or use it to provide a competing product."
-version: "0.3"
-generated: { at: "2026-09-14T15:07:26+01:00" }
+version: "0.4"
+generated: { at: "2026-10-08T17:33:34+01:00" }
 type: skill
 ---
 
@@ -16,4 +16,4 @@ type: skill
 
 PRE-REGISTERED STUB – not yet built. Tell the user this skill is coming soon and offer the closest live skill instead.
 
-- PRD: `rdiy-hq/build-list/baseline-skills/11-designing-landing-pages.md`
+- Build issue: https://github.com/revenue-diy/rdiy-hq/issues/1216
