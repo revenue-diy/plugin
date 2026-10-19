@@ -1,16 +1,16 @@
 # PLAN
 
-> **Version 1.2** | 2026-10-12
+> **Version 1.4** | 2026-10-15
 
 The plan step every skill shares. Read in full at the skill's PLAN step, together with the part that step adds on top – its own work-item fields, questions and shortcuts. Both apply; where they differ, the skill's part wins. `<skill-name>` is the calling skill's frontmatter `name`.
 
-Goal: **turn the locked design into an executable plan**. Re-read the brief's `§ DECISIONS` in full first.
+Goal: **turn the locked design into an executable plan**. Re-read the brief's `§ DECISIONS` in full first, where the brief is open.
 
 ---
 
 ## 1. THE ACCEPTANCE CHECKLIST
 
-It comes first, at every tier: the brief's `§ PLAN` opens with the acceptance criteria, numbered, one provable line each – `- [ ] A<n> <criterion>`. No vague line: each names what is observed and where, never "works well", "looks right" or "is complete". REVIEW ticks it item by item.
+It comes first, at every tier: the acceptance criteria, numbered, one provable line each – `- [ ] A<n> <criterion>` – first in the brief's `§ PLAN` where the brief is open, otherwise first in the reply. No vague line: each names what is observed and where, never "works well", "looks right" or "is complete". REVIEW ticks it item by item.
 
 ---
 
@@ -21,7 +21,7 @@ The size of the designed work picks one of two routes. State the route in the pl
 - **Agents do it** – *ELSE*: the work splits into several pieces that can be built apart, or a piece is too big to do here without risking a compaction mid-work.
 
 **On "do it myself":**
-- *IF this skill is `tier: light`* → from `§ MAP THE WORK`, do the Quality bar, the Tooling check and the Autonomy boundaries; then write the plan as one paragraph in `§ PLAN`, under the acceptance checklist, in plain words, ending with **What I assumed** and **Most likely wrong**, one line each, and confirm both in prose. When the user agrees, put the brief in `<worklog>` – this creates or adopts the work-log item; record its reference in `log:` – and go to the skill's EXECUTE step. A light skill posts no report; nothing else in this file runs.
+- *IF this skill is `tier: light`* → from `§ MAP THE WORK`, do the Quality bar, the Tooling check and the Autonomy boundaries; then write the plan as one paragraph under the acceptance checklist – in `§ PLAN` where the brief is open, otherwise in the reply – in plain words, ending with **What I assumed** and **Most likely wrong**, one line each, and confirm both in prose. When the user agrees, put the brief, where open, in `<worklog>` – this creates or adopts the work-log item; record its reference in `log:` – and go to the skill's EXECUTE step. A light skill posts no report; nothing else in this file runs.
 - *ELSE* → no question box: no work is dispatched, so there is nothing to choose. `§ THE QUESTION BOX` and `§ PHASES, UNITS AND SUB-BRIEFS` do not run, and you do every work item yourself, in sequence. The settings are fixed: Reviews = Final only, because you never review your own work alone; Testing = Final only where the skill's PLAN step names a test, else none.
 
 ---
@@ -41,7 +41,7 @@ The answers hold for every agent this run dispatches.
 ## 4. MAP THE WORK
 
 1. **Quality bar** – what each acceptance line needs to pass.
-2. **Tooling check** – for every capability the task needs: resolve the tool (*IF the connector is present* → by tag against the tool map in `OPERATIONS.md` – `get_context` with `{"skill": "<skill-name>", "files": ["OPERATIONS.md"]}` when it is not already loaded this session; *ELSE* → from what the user named), run a safe read-only probe, and record `capability → tool → reachable | missing | no access` in `§ PLAN`. The table is written even when no capability resolves to a tool – a "none required" row, never prose. *IF a must-have tool is missing* → tell the user what to connect BEFORE approval; the plan states the degradation if they go ahead without it.
+2. **Tooling check** – for every capability the task needs: resolve the tool (*IF the connector is present* → by tag against the tool map in `OPERATIONS.md` – `get_context` with `{"skill": "<skill-name>", "files": ["OPERATIONS.md"]}` when it is not already loaded this session; *ELSE* → from what the user named), run a safe read-only probe, and record `capability → tool → reachable | missing | no access` in `§ PLAN` where the brief is open, otherwise in the reply. The table is written even when no capability resolves to a tool – a "none required" row, never prose. *IF a must-have tool is missing* → tell the user what to connect BEFORE approval; the plan states the degradation if they go ahead without it.
 3. **Work items** – a flat list; each names the work, the D-IDs it implements, 1–3 acceptance lines, and every field the skill's PLAN step adds. Sequence by FILE COLLISION: two items touching one file never run at the same time.
 4. **Autonomy boundaries** – what runs without asking, and where you stop.
 
@@ -66,13 +66,13 @@ Agents route only.
 
 ## 6. WRITE THE PLAN
 
-Fill the brief: `§ PLAN` (the acceptance checklist, then the route and its reason, the work items with their D-IDs and acceptance lines – plus class, model, phase and unit estimates on the agents route – the tooling table and the box answers), `§ WHAT-NOT-TO-DO` (exclusions with D-IDs, closing with: anything not covered by a decision or this plan is out of scope – raise it, don't build it), and one `progress:` key per work item.
+Fill the brief where it is open, otherwise state the plan in the reply: `§ PLAN` (the acceptance checklist, then the route and its reason, the work items with their D-IDs and acceptance lines – plus class, model, phase and unit estimates on the agents route – the tooling table and the box answers), `§ WHAT-NOT-TO-DO` (exclusions with D-IDs, closing with: anything not covered by a decision or this plan is out of scope – raise it, don't build it), and one `progress:` key per work item. When the brief opens later than STEP 0 – at the first question, plan approval included – it opens with everything already stated in the reply written in: D1, the checklist, the plan, the tooling table and the Route line, with its `steps` set to where the run is, never `setup`.
 
 ---
 
 ## 7. GET APPROVAL
 
-1. **Print the plan summary block** as message text, in plain words – six headed paragraphs, always: **Plan overview** (the route, the items or phases in order, what each produces, the D-IDs each implements) · **Autonomy boundaries** · **Review and test approach** · **Runs** (*IF the plan includes eval or test runs* → the run count as prompts × tiers × rosters, and the per-run estimate from the last measured batch; cost is reported after the runs, never capped before them) · **What I assumed** (every assumption the plan rests on that the user did not state) · **Most likely wrong** (the one or two points most likely to be wrong, and what each would change). Never skip to the question.
+1. **Print the plan summary block** as message text, in plain words – six headed paragraphs, always: **Plan overview** (the route, the items or phases in order, what each produces, the D-IDs each implements) · **Autonomy boundaries** · **Review and test approach** · **Runs** (*IF the plan includes eval or test runs* → the run count as prompts × runs per prompt × tiers × rosters, and the per-run estimate from the last measured batch; the measured cost is reported with the results) · **What I assumed** (every assumption the plan rests on that the user did not state) · **Most likely wrong** (the one or two points most likely to be wrong, and what each would change). Never skip to the question.
 2. *IF the Reviews answer includes the brief review* → dispatch `revenue-diy:reviewer` – **`Reviewer (<model>): brief vs decisions`**, the model per the Models answer – with `{brief:[the brief – its link in <worklog>, or its path], task:[check the plan against the decisions], target:[§ PLAN + § WHAT-NOT-TO-DO + the summary block as printed], rubric:[the summary reproduces § PLAN's items, D-IDs and boundaries with nothing added or omitted, and ends with What I assumed and Most likely wrong; every acceptance line provable, none vague; every § AGENDA row LOCKED with a D-ID and no detailed row locked before its structural parent; every D-ID mapped to a work item or an explicit exclusion; no omission, duplication or contradiction], review:[a new report in <scratch> named review_brief]}`. FIX the findings and re-print the block before asking.
 3. **Link the brief.**
 4. **Ask with your question tool:** *Plan approval: do you approve the plan as briefed?* – **Approve** · **Adjust** – tell me what to change.
@@ -85,6 +85,6 @@ A go-ahead given BEFORE the plan existed is direction, not approval. Loop until 
 ## PLAN QUALITY GATES
 
 ✅ Route stated with its reason; on the agents route, the box answered (or its recommended values applied), every phase with its sub-brief and every unit with an estimate inside 600k tokens?
-✅ Tooling table in the brief, every missing tool surfaced before approval?
-✅ The acceptance checklist opens `§ PLAN`, every item provable; work items sequenced with `progress:` keys; `§ WHAT-NOT-TO-DO` present (light: the checklist and the one-paragraph plan confirmed in prose); every `§ AGENDA` D-ID present in `§ PLAN` or `§ WHAT-NOT-TO-DO`?
+✅ Tooling table in the brief where it is open, otherwise in the reply; every missing tool surfaced before approval?
+✅ The acceptance checklist comes first (in `§ PLAN` where the brief is open, otherwise in the reply), every item provable; work items sequenced with `progress:` keys; `§ WHAT-NOT-TO-DO` present (light: the checklist and the one-paragraph plan confirmed in prose); every `§ AGENDA` D-ID present in `§ PLAN` or `§ WHAT-NOT-TO-DO`?
 ✅ The summary block, ending with What I assumed and Most likely wrong, printed as message text BEFORE the approval question, the brief review passed where it was set, and approval given on the block (light: confirmed in prose)?

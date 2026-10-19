@@ -1,6 +1,6 @@
 # ACCEPTANCE REVIEW
 
-> **Version 1.2** | 2026-10-12
+> **Version 1.4** | 2026-10-16
 
 How every skill proves its output meets its acceptance checklist. Read in full at the skill's REVIEW step. That step names this skill's own parts: its checks, any test or eval run and where it runs, and the final reviewer's model, rubric and announce noun. Everything else runs as written here.
 
@@ -10,7 +10,7 @@ Cheaper checks first; never self-certify a fix – re-run the failed check; neve
 
 ## THE ACCEPTANCE CHECKLIST
 
-The plan opened the brief's `§ PLAN` with the acceptance checklist: `- [ ] A<n> <criterion>`, one provable line each. A review pass ticks it item by item, ONE checklist per pass:
+The plan opened with the acceptance checklist – in the brief's `§ PLAN` where the brief is open, otherwise in the reply: `- [ ] A<n> <criterion>`, one provable line each. A review pass ticks it item by item, ONE checklist per pass:
 - `- [x] A<n> <criterion> – <proof>` – the proof is an observation (output, a file and line, a link that opens, a quote), never "done";
 - `- [ ] A<n> <criterion> – OPEN: <what is missing>`;
 - closed by `Verdict: all <n> met` or `Verdict: <m> of <n> open`.
@@ -26,7 +26,7 @@ The final review writes it, every item, one by one; an unticked item is a P1. Th
 
 *IF a check fails* → trivial → fix and re-run; else → go back to the skill's EXECUTE step, fix, and re-run this review.
 
-**Self-tick path** – *IF this skill is `tier: light`, or its REVIEW step names a simple path this run is on* → tick the acceptance checklist yourself in the format `§ THE ACCEPTANCE CHECKLIST` sets, item by item, with its proof, and deliver it with the output – the user is the independent check; iterate on their feedback, re-ticking what changed. On a simple path, also put the ticked checklist in `<worklog>`; a light skill posts no report. Then go to the skill's WRAP-UP step; the rest of this file does not run.
+**Self-tick path** – *IF this skill is `tier: light`, or its REVIEW step names a simple path this run is on* → tick the acceptance checklist yourself in the format `§ THE ACCEPTANCE CHECKLIST` sets, item by item, with its proof, and deliver it with the output – the user is the independent check; iterate on their feedback, re-ticking what changed. On a simple path with the brief open, also put the ticked checklist in `<worklog>`; a light skill posts no report. Then go to the skill's WRAP-UP step; the rest of this file does not run.
 
 ---
 
@@ -47,7 +47,9 @@ P1 blocks · P2 should fix · P3 nice.
 - **P3** → a trivial fix, or reported at WRAP-UP.
 - **Outside this work's acceptance** → a follow-up, named in the report and put in `<worklog>`, never left only in a review report.
 
-Log every review in the brief's `§ REVIEW RESULTS` with `F<n>` IDs and verdicts.
+**An edit after the final review re-runs it** – any change to the output after the final review, by a worker or by you, runs the final review again before the report. A P3 or a point the final review raises may be fixed by you rather than its agent, on that condition. A fix-then-re-run loop runs at most two re-runs, and a new P3 a re-run raises is reported, not fixed again.
+
+Log every review with `F<n>` IDs and verdicts – in the brief's `§ REVIEW RESULTS` where the brief is open, otherwise in the reply.
 
 ---
 
@@ -61,4 +63,4 @@ When the routing closes, write your own integrated review – with the ticked ch
 
 ✅ Self-checks pass, decision table built, your own integrated review done?
 ✅ Every finding fixed and re-verified, or named as a follow-up; all logged as `F<n>`; every review report in `<worklog>`?
-✅ The last pass's acceptance checklist covers every item, each ticked with its proof or named as open?
+✅ The last pass's acceptance checklist covers every item, each ticked with its proof or named as open, and no edit to the output came after it?

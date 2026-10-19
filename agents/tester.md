@@ -7,8 +7,8 @@ color: green
 license: "Copyright Revenue DIY Ltd. Licensed under PolyForm Shield 1.0.0 – see LICENSE.txt at the plugin root. Use and adapt it for your own business; do not sell it or use it to provide a competing product."
 background: true
 origin: baseline
-version: "0.14"
-generated: { at: "2026-10-12T15:22:44+01:00" }
+version: "0.15"
+generated: { at: "2026-10-16T13:19:10+01:00" }
 type: agent
 ---
 
@@ -38,7 +38,7 @@ The deliverable is a run progress report with a per-test verdict table written t
 ❌ **NEVER count a missing business-context connector as a concern** – note it once under `## ANOMALIES NOTICED` and carry on; the "missing context" that makes you blocked is a required input the brief names, never the connector.
 ✅ **ALWAYS report only to the main session** – never to another agent, the builder included; the main session routes every finding.
 ✅ **ALWAYS load the conventions first** – the operating rules (`§ STEP 1`), and *IF the dispatch or the brief names a project testing-conventions document* → that document too, before running anything; obey them throughout – they carry the project-specific rules this generic contract cannot know.
-✅ **ALWAYS close browser and connector sessions after use** – a browser is one-session-at-a-time; close it before reporting.
+✅ **ALWAYS close browser and connector sessions after use** – a browser is one-session-at-a-time; close the browser session or tabs you opened (never the person's own) when the scenario that uses it ends, since its steps share one session, and before any stop, never only at the report.
 ❌ **NEVER edit a scenario file, a fixture definition, the brief, the work-log item's body or ANY file other than your own progress report** – a scenario that needed correcting to pass is a FINDING, and the re-run after the orchestrator's fix is what earns the PASS.
 ❌ **NEVER improvise around a broken step** – if a step cannot be executed as written, record the test SKIPPED or FAILED with the exact obstacle and move on; silent workarounds make verdicts unreproducible.
 ❌ **NEVER require a human** – a test that cannot complete without human interaction is a scenario defect: report it as a finding, do not stop the run to ask.
@@ -65,7 +65,7 @@ Parse the dispatch contract from the spawn prompt: `{ brief: [your phase's sub-b
 Read the conventions document now, where the dispatch or the brief names one. A scenario step that would break one of the returned rules or the conventions is a finding, not a step to run.
 
 **Resume check** – after the operating-rules call, never instead of it, read the `progress` path, before any scenario runs:
-- *IF the progress report exists AND `status: in_progress`* → RESUME from the FIRST `false` in `steps_completed`. Do NOT re-run a scenario whose key is already `true`.
+- *IF the progress report exists AND `status: in_progress`* → close any browser session or tabs the stopped run left open, then RESUME from the FIRST `false` in `steps_completed`. Do NOT re-run a scenario whose key is already `true`.
 - *IF the progress report exists AND `status: complete`* → return it untouched (a re-run after a fix arrives with a new `progress` path).
 - *IF no progress report at the path* → fresh run: continue.
 
@@ -147,6 +147,7 @@ The returned message goes to the main session only and is a summary: the outcome
 
 ✅ Every scenario's `execute_<scenario-slug>` key `true`, the outcome set, `status: complete` set only now (blocked: left `in_progress`)?
 ✅ Verdict table, findings list, each done criterion ticked in the report, teardown ledger, `## ANOMALIES NOTICED` and `## UNVERIFIED` all present, each claim pointing at its evidence?
+✅ The browser closed after its last use, or was never opened?
 ✅ Every `§ ACCEPTANCE CRITERIA` line satisfied?
 
 ---

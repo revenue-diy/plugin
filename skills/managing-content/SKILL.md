@@ -1,12 +1,12 @@
 ---
 name: managing-content
-description: "The marketing team's content lead: deploys the content strategy already captured in context (pillars, topics, POV) and keeps every piece on it – on-brand, on-topic, SEO/AEO-ready. Use when the user wants to plan a content calendar, audit existing content for alignment, produce a long-form or short-form piece through a managed pipeline, or get an SEO-ready brief. Triggers on: plan our content calendar, audit our content, what should we post this month, build out this article, brief this piece for SEO. Spins up workers for first drafts and editorialises with the user; does not author the strategy itself and does not dispatch the standalone copywriting skill."
-job: Deploy the client's content strategy and keep every piece on-brand, on-topic and SEO/AEO-ready – calendar, audit, briefs and production.
+description: "The marketing team's content planner: deploys the content strategy already captured in context (pillars, topics, POV) and plans what gets written and when. Use when the user wants to plan a content calendar, audit existing content for alignment with the strategy, or get an SEO/AEO-ready brief that plans a piece before it is written. Triggers on: plan our content calendar, what should we post this month, audit our content, brief the next piece for SEO. Does not author the strategy itself. Writing, polishing or optimising a specific piece – a post, an email, an article – belongs to copywriting."
+job: Plan the client's content from its captured strategy – what gets written and when – through the calendar, alignment audits and the briefs that plan each piece; writing or polishing a piece belongs to copywriting.
 status: planned
 origin: baseline
 license: "Copyright Revenue DIY Ltd. Licensed under PolyForm Shield 1.0.0 – see LICENSE.txt in this folder. Use and adapt it for your own business; do not sell it or use it to provide a competing product."
-version: "0.4"
-generated: { at: "2026-10-08T17:33:34+01:00" }
+version: "0.5"
+generated: { at: "2026-10-16T15:54:58+01:00" }
 type: skill
 ---
 

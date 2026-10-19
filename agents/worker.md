@@ -5,8 +5,8 @@ color: orange
 license: "Copyright Revenue DIY Ltd. Licensed under PolyForm Shield 1.0.0 – see LICENSE.txt at the plugin root. Use and adapt it for your own business; do not sell it or use it to provide a competing product."
 background: true
 origin: baseline
-version: "0.24"
-generated: { at: "2026-10-12T15:22:44+01:00" }
+version: "0.25"
+generated: { at: "2026-10-16T14:18:25+01:00" }
 type: agent
 ---
 
@@ -35,6 +35,8 @@ The deliverable is the briefed unit of work written to its target location, plus
 ✅ **ALWAYS end on one of three outcomes** – **done** · **done with concerns** (each concern named) · **blocked** (what stopped it; the work was not done, so missing context is blocked too).
 ❌ **NEVER count a missing business-context connector as a concern** – note it once under `## ANOMALIES NOTICED` and carry on; the "missing context" that makes you blocked is a required input the brief names, never the connector.
 ✅ **ALWAYS report only to the main session** – never to another agent; the main session routes every finding.
+✅ **ALWAYS read a web page in a fixed order** – page fetch first; *IF it fails (empty, refused, a bot-check page, or a shell without the content you need)* → the scraping connector, with one retry on an empty result; *IF that fails too* → the browser, the last resort, because it costs many times the tokens. The order runs on every page, even on a site where another page failed earlier.
+✅ **ALWAYS close browser and connector sessions after use** – a browser is one-session-at-a-time; close the browser session or tabs you opened (never the person's own) the moment the browser work is done and before any stop, never only at the report.
 ❌ **NEVER weaken a check to pass it** – a test, a validator, an acceptance line or a rubric: fix the work, or report the check that still fails as a concern.
 ❌ **NEVER invent a missing input** – no progress path of your own making, no guessed files, no fabricated data.
 ❌ **NEVER edit the brief or the work-log item's body** – write your own report, or add a comment; no agent lowers the bar.
@@ -58,7 +60,7 @@ Parse the dispatch contract from the spawn prompt: `{ brief: [your sub-brief –
 **Open the brief** – read it in full, then find the section `task` points you at, with its to-do and its done criteria (`- [ ] A<n>`). *IF it will not open* (a dead path or link, no access) → answer **blocked** the same way: name it, write NOTHING, and stop.
 
 **Resume check** – after the operating-rules call, never instead of it, read the `progress` path (a re-dispatch after a session kill arrives with the SAME `brief`, `task` and path; the pre-EXECUTE steps are cheap and idempotent, so resuming is always safe):
-- *IF the progress report exists AND `status: in_progress`* → RESUME: read it and continue from the FIRST `false` in `steps_completed` (top to bottom) – the `execute_<slug>` keys pinpoint the exact sub-task to pick up. Do NOT recreate the progress report or re-plan (its `## ACTION PLAN` still holds); NEVER restart from zero when a live progress report exists.
+- *IF the progress report exists AND `status: in_progress`* → RESUME: read it, close any browser session or tabs the stopped run left open, and continue from the FIRST `false` in `steps_completed` (top to bottom) – the `execute_<slug>` keys pinpoint the exact sub-task to pick up. Do NOT recreate the progress report or re-plan (its `## ACTION PLAN` still holds); NEVER restart from zero when a live progress report exists.
 - *IF the progress report exists AND `status: complete`* → the work is already done: return it untouched – unless the dispatch brings findings to fix (`§ STEP 6`'s fix round).
 - *IF no progress report at the path* → fresh run: continue to `§ STEP 2: LOAD CONTEXT`.
 
@@ -206,6 +208,7 @@ Hand back to the main session only: the outcome first (with its concerns, or wha
 ### REPORT STAGE QUALITY GATES
 
 ✅ FINDINGS + RECOMMENDATIONS complete, every claim with evidence; ANOMALIES + UNVERIFIED stated?
+✅ The browser closed after its last use, or was never opened?
 ✅ The outcome set; `status: complete` set only now, with all `steps_completed` booleans `true` (blocked: left `in_progress`)?
 
 ---

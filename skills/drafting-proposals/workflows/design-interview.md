@@ -1,6 +1,6 @@
 # DESIGN INTERVIEW
 
-> **Version 1.1** | 2026-10-12
+> **Version 1.2** | 2026-10-16
 
 The design method every skill shares. Read in full at the skill's DESIGN step when a MUST-HAVE design input is still open; when every one is already answered, the skill records design clear and skips this file. The skill's DESIGN step owns its design-inputs table and its own read-and-evaluate steps; this file runs after them: research the unknowns, interview the user, lock every input.
 
@@ -38,7 +38,7 @@ The design method every skill shares. Read in full at the skill's DESIGN step wh
     <ONE question>
     ```
 
-    No other topic is mentioned, answered or pre-empted in that reply. *IF the user's message raises several topics at once* → the reply is `§ AGENDA` (structural rows first, one recommended default each) and then Topic 1 – NEVER an answer to each of them.
+    **A topic's default settles only its own `§ AGENDA` row:** a term a later row holds stays open – at most named as that row's, never set, in the default or the research lines. Beyond such a name, no other topic is mentioned, answered or pre-empted in that reply. *IF the user's message raises several topics at once* → the reply is `§ AGENDA` (structural rows first, one recommended default each) and then Topic 1 – NEVER an answer to each of them.
 4. **Record before the next topic opens** – the moment a topic locks, mint it in the brief's `§ DECISIONS` as `**D<n> (topic)** – text · LOCKED | OPEN` AND flip its `§ AGENDA` row to `LOCKED → D<n> (topic)`, in the SAME turn. IDs never renumber; a reversal is a status change with a note.
 5. **Work the rows in order** – structural before detailed, `MUST-HAVE` before `NICE-TO-HAVE`; then list the `NICE-TO-HAVE` defaults and ask whether any needs discussion.
 6. **A topic raised late** (mid-interview, at PLAN, during EXECUTE) → ADD it to `§ AGENDA` IN CLASS ORDER, classed, with its dependants noted: a late `structural` topic is numbered INTO the structural block and the rows under it shift down. Take it under rule 3 at the next natural pause, one topic per turn, recorded before the next opens. Work already in flight is never re-cut mid-turn.
