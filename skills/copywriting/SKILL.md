@@ -1,13 +1,13 @@
 ---
 name: copywriting
-description: "Use when the user wants copy written or sharpened in their own voice: a LinkedIn or social post, an email or one-to-one message, a newsletter, an article or blog, a page section, a headline or a hook – from a rough draft, notes or only an idea. Also when a draft needs punching up, tightening, shortening or checking against the brand voice before it goes out. Page structure belongs to designing-landing-pages, multi-touch sequences to building-campaigns, a content plan to managing-content."
-job: Sharpen a draft, a message or rough notes into on-brand copy that sounds like the user and is ready to send – the copywriter's job in a marketing team.
+description: "Writes and sharpens on-brand copy in the user's voice, ready to send. Load it first whenever they want copy written, polished or tightened, however short: a LinkedIn or social post, newsletter, announcement, article or blog post, an email, message or reply, a customer letter, a headline, a page section, a profile or collateral. Works from rough notes, a brief, only an idea or a draft, even a stiff or AI-sounding one. Includes their own text for any reader: an email, message or follow-up to a prospect or customer, made clearer, warmer, shorter or less pushy. Not for sequences, proposals, page layouts, lists of ideas or angles, one-off letters or explanations of a contract, commercial terms or a decision, or planning what to write and when."
+job: Write any on-brand piece meant for an audience – a post, an email, an announcement, a page section, an article – from an idea, a brief, notes or a draft, or sharpen existing text so it sounds like the user.
 tier: light
 status: built
 origin: baseline
 license: "Copyright Revenue DIY Ltd. Licensed under PolyForm Shield 1.0.0 – see LICENSE.txt in this folder. Use and adapt it for your own business; do not sell it or use it to provide a competing product."
-version: "0.8"
-generated: { at: "2026-10-16T21:13:47+01:00" }
+version: "0.9"
+generated: { at: "2026-10-19T04:03:29+01:00" }
 type: skill
 ---
 
@@ -221,7 +221,7 @@ Goal: **hand off, close the run, capture what should outlive the session.** Orde
 
 ### 5.2 REPORT TO USER
 
-One message: **output** first – the final text, ready to copy, when the reply is its home, else where it landed · **work done** (problems) · **review results** (the last scan log's verdict, the feedback rounds, the acceptance checklist's verdict) · **follow-ups** (open acceptance items first; every `[SOURCE NEEDED]`; an image prompt, where the piece will carry an image and none was made; then, only where the piece clearly feeds a bigger job, ONE dismissable line naming its skill – `managing-content` for more pieces, `designing-landing-pages` for its page, `building-campaigns` for a sequence – handing over the piece as a file, never calling that skill).
+One message: **output** first – the final text, ready to copy, when the reply is its home, else where it landed · **work done** (problems) · **review results** (the last scan log's verdict, the feedback rounds, the acceptance checklist's verdict) · **follow-ups** (open acceptance items first; every `[SOURCE NEEDED]`; an image prompt, where the piece will carry an image and none was made; then, only where the piece clearly feeds a bigger job, ONE dismissable line naming its skill – `managing-content` to plan what to write next, `designing-landing-pages` for its page, `building-campaigns` for a sequence – handing over the piece as a file, never calling that skill).
 
 ### 5.3 FEEDBACK
 
