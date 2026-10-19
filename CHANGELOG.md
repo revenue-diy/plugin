@@ -4,6 +4,32 @@ What changed in each release of the Revenue.DIY plugin.
 
 ---
 
+## [v0.33.0] – 2026-10-19 – baseline sync (v0.33.0)
+
+What changed in baseline v0.33:
+
+### v0.33.0
+
+### Highlights
+The copywriting skill now steps in on its own for more of your writing, including text you write yourself for any reader.
+
+### Changed
+- Changed the copywriting skill so it is picked up for any on-brand piece written for an audience, including your own drafts for any reader
+
+Revenue.DIY plugin system testing:
+✅ Release checks on the baseline - PASS
+
+
+---
+
+
+
+Revenue.DIY plugin system testing:
+✅ Claude Code CLI - PASS
+✅ Release checks on this repository (baseline v0.33.0) - PASS
+
+---
+
 ## [v0.32.0] – 2026-10-19 – baseline sync (v0.32.0)
 
 What changed in baseline v0.32:
