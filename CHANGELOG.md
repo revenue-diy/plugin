@@ -4,6 +4,44 @@ What changed in each release of the Revenue.DIY plugin.
 
 ---
 
+## [v0.32.0] – 2026-10-19 – baseline sync (v0.32.0)
+
+What changed in baseline v0.32:
+
+### v0.32.0
+
+### Highlights
+The copywriting skill is now ready: bring a draft, a message or rough notes, and it shapes them into on-brand copy, checking your brand rules before it hands anything over. Several skills also say more clearly when they should be used, and the helpers now open a browser only when a simple page read fails.
+
+### Added
+- Added the copywriting skill: a writing partner for posts, emails and page sections, with format guides, proven copy frameworks and a brand-rule check on every version it hands over
+
+### Changed
+- Changed the engineering skill so it is picked up first for anything technical, including a page, form or automation that has stopped working or gives a wrong result
+- Changed the engineering skill so a retired feature is removed in full, never left switched off
+- Changed the getting-things-done skill to the shared design, planning, review and wrap-up steps, with a clearer description of the one-off documents it takes
+- Changed the managing-content skill to focus on planning: writing or polishing a piece now belongs to copywriting
+- Changed the skills so a brief is opened only when the task needs one: a quick task done in one reply goes straight ahead, with your business context loaded first
+- Changed the researcher, tester and reviewer helpers to read a web page with a simple fetch first, use the browser only as a last resort, and close it as soon as they are done
+- Changed the researcher helper to make clear it only reads and never changes anything
+
+### Fixed
+- Fixed a late edit slipping past review: any change made after the final review now runs that review again
+
+Revenue.DIY plugin system testing:
+✅ Release checks on the baseline - PASS
+
+
+---
+
+
+
+Revenue.DIY plugin system testing:
+✅ Claude Code CLI - PASS
+✅ Release checks on this repository (baseline v0.32.0) - PASS
+
+---
+
 ## [v0.31.0] – 2026-10-12 – baseline sync (v0.31.0)
 
 What changed in baseline v0.31:
