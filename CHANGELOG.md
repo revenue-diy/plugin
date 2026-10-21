@@ -4,6 +4,33 @@ What changed in each release of the Revenue.DIY plugin.
 
 ---
 
+## [v0.34.0] – 2026-10-21 – baseline sync (v0.34.0)
+
+What changed in baseline v0.34:
+
+### v0.34.0
+
+### Highlights
+The feedback question at the end of a task now records a rating only when you give one.
+
+### Fixed
+- Fixed the end-of-task feedback so a rating is passed on only when you give one yourself – skipping the question sends nothing
+- Fixed praise in a reply being counted as a rating
+
+Revenue.DIY plugin system testing:
+✅ Release checks on the baseline - PASS
+
+
+---
+
+
+
+Revenue.DIY plugin system testing:
+✅ Claude Code CLI - PASS
+✅ Release checks on this repository (baseline v0.34.0) - PASS
+
+---
+
 ## [v0.33.0] – 2026-10-19 – baseline sync (v0.33.0)
 
 What changed in baseline v0.33:
