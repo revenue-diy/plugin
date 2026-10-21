@@ -1,6 +1,6 @@
 # COMPOUND KNOWLEDGE
 
-> **Version 1.2** | 2026-10-15
+> **Version 1.5** | 2026-10-20
 
 The wrap-up capture every skill shares: what this session learned that should outlive it, and the skill's rating. Read in full at the skill's WRAP-UP step, once documentation is final and the final report is in `<worklog>`. Part 1 runs BEFORE the report is delivered; part 2 runs in the SAME message, after the report text. `<skill-name>` is the calling skill's frontmatter `name`.
 
@@ -19,10 +19,11 @@ The wrap-up capture every skill shares: what this session learned that should ou
 ## PART 2: AFTER THE REPORT – SAME MESSAGE
 
 4. **Ask** – in the SAME message as the report text, ONE call to your question tool, the session's last question: one single-select question per candidate – *"Save to the context system? – <the fact, in the user's words>"* with **Save** / **Skip** (the free-text "Other" is the user's own version, filed verbatim) – and, ALWAYS LAST, *"Skill rating: how did `<skill-name>` do this session?"* with **Good (⭐⭐⭐⭐)** / **OK (⭐⭐⭐)** / **Meh (⭐⭐)** / **Bad (⭐)**. This closing question does not by itself open a brief.
-5. **Route the answers** – every Save in ONE `submit_context` call: `{"skill": "<skill-name>", "changes": [{"file": "<the module the index names>", "add": "<the fact>"}]}`; when unsure of the module, read the index first (`get_context` with `{"skill": "<skill-name>", "files": ["index"]}`). A rating → `rate_skill` with `<skill-name>` and the rating – *IF `rate_skill` is not in your tools* → search for it with your tool-search tool, the query the bare name `rate_skill`. A skill problem written under "Other" → `send_feedback` with `{"skill": "<skill-name>", "feedback": "<their words verbatim>", "bug": true | false}` – `bug` is true when something is technically broken. A reply meaning no → nothing forwarded. NEVER re-ask. `skill` on these calls attributes them to the skill and counts no session.
+5. **Route the answers** – every Save in ONE `submit_context` call: `{"skill": "<skill-name>", "changes": [{"file": "<the module the index names>", "add": "<the fact>"}]}`; when unsure of the module, read the index first (`get_context` with `{"skill": "<skill-name>", "files": ["index"]}`). A rating the user gave in the rating question (an option, or a clear rating typed under "Other": one of the four ratings by name, or a star count or number on their 1–4 scale) → `rate_skill` with `<skill-name>` and that rating – *IF `rate_skill` is not in your tools* → search for it with your tool-search tool, the query the bare name `rate_skill`. A skill problem written under "Other" → `send_feedback` with `{"skill": "<skill-name>", "feedback": "<their words verbatim>", "bug": true | false}` – `bug` is true when something is technically broken. An answer meaning no → that answer forwards nothing. No rating answer (the rating question not asked, skipped or unanswered), an unclear one, or praise, thanks or any other free text without a rating → no `rate_skill`; NEVER infer, default or carry over a rating. NEVER re-ask. `skill` on these calls attributes them to the skill and counts no session.
 
 ---
 
 ## GATE
 
 ✅ Run in full (connector present), or its skip line printed (connector absent)?
+✅ `rate_skill` called only with a rating the user gave in the rating question – never inferred, defaulted or carried over?
