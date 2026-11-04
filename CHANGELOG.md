@@ -4,6 +4,48 @@ What changed in each release of the Revenue.DIY plugin.
 
 ---
 
+## [v0.35.0] – 2026-11-04 – baseline sync (v0.35.0)
+
+What changed in baseline v0.35:
+
+### v0.35.0
+
+### Highlights
+
+Every skill now tidies away the working files it made once the work is safely recorded, and the helper agents are stricter about where their facts come from and what they may open. Reviews are firmer too: after fixes, a review runs again until it comes back clean.
+
+### Added
+
+- Clean-up at wrap-up in every skill – the working folder a run made is removed once its records are kept, and your AI app's own data is never touched
+- Model and effort matching – each skill picks a suitable model and effort for each task it hands to a helper agent
+- A guard in all four helper agents that keeps them away from key, credential and token files
+
+### Changed
+
+- The researcher cites only pages it actually opened, flags claims that rest on a single source, and accepts an official, primary source for its own facts
+- Helper agents can read your business context but never write to it
+- The tester is told which keys and logins to use by name and where they are kept, never by their values
+- Design questions come one topic at a time, each printed in full, and nothing is recorded as decided until you have agreed it
+- Getting-things-done asks every question its topic needs in its first reply, and prints its report in the reply
+- Engineering reads the spec before it plans, adds an efficiency check to code reviews, and runs a final review on every route except a simple fix
+- After fixes, the final review runs again in full until it is clean, and small findings are fixed straight away
+- Every acceptance checklist item is ticked only with its proof
+- Plans and fix rounds are sized to the task
+
+Revenue.DIY plugin system testing:
+✅ Release checks on the baseline - PASS
+
+
+---
+
+
+
+Revenue.DIY plugin system testing:
+✅ Claude Code CLI - PASS
+✅ Release checks on this repository (baseline v0.35.0) - PASS
+
+---
+
 ## [v0.34.0] – 2026-10-21 – baseline sync (v0.34.0)
 
 What changed in baseline v0.34:
