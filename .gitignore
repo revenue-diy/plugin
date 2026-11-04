@@ -1,3 +1,9 @@
 # Transient working files (scratch, generated artefacts).
 # Convention: .temp/<YYYY-MM-DD>_<task>/ so everything stays organised and dated.
 .temp/
+
+# Claude Code worktrees made by EnterWorktree or Agent isolation (rdiy-hq#2007, D531)
+.claude/worktrees/
+
+# Playwright MCP output (snapshots, screenshots, console logs it names itself)
+.playwright-mcp/

@@ -1,8 +1,10 @@
 # ENGINEERING REVIEW CHECKLIST
 
-> **Version 1.9** | 2026-10-12
+> **Version 1.12** | 2026-11-01
 
 Rubric for `reviewer` dispatches from `engineering`. The sub-brief's Review section, or the dispatch's rubric, states WHICH section applies (code or artefact review / testing review / final sweep); at the final review, the acceptance checklist and its tick format come with it – score every line in the named section(s) with evidence; tier findings P1 (blocks ship) / P2 (should fix) / P3 (nice-to-have).
+
+**Class every finding SURFACE or TOOLING.** SURFACE is the thing being shipped; TOOLING is what helped build or prove it – test harnesses, proving scripts and test helpers. A TOOLING finding is P3 by default; a tooling defect that hides a surface defect makes the hidden surface defect the finding, classed SURFACE at its own severity, and a surface defect is never down-rated because the tooling found it. Weak evidence that a check ran – a bare "checked by hand", no screenshot or log, a check script that crashed – is TOOLING, P3, when the shipped surface is verified correct; it is SURFACE only when it leaves a surface defect unfound.
 
 ---
 
@@ -11,6 +13,7 @@ Rubric for `reviewer` dispatches from `engineering`. The sub-brief's Review sect
 - [ ] **Does what the brief says** – behaviour matches the item's acceptance lines; no silent scope drift.
 - [ ] **Simplest thing that works** – nothing the acceptance lines don't need (no extra mechanism, option, abstraction or tooling) unless what breaks without it is named and likely; a one-off uses what already exists.
 - [ ] **Standards compliance** – follows the standards named in the dispatch (the engineering conventions the connector points at / repo rules); review against THOSE, never generic best-practice memory.
+- [ ] **Efficient and on the documented path** – no needless work, repeated calls or reads, or avoidable loops or round trips, each flag quoting the code that shows it; no departure from the platform's official documentation or a named standard, each flag citing it.
 - [ ] **Automation hygiene** *(workflows and integrations)* – the ACTIVE version is the edited one (no unpublished draft); separate workflows unless triggers share downstream logic; happy, user-error and system-error paths each wired; idempotent on a duplicate event; no credential or instance ID in the artefact.
 - [ ] **Security basics** – inputs validated/sanitised, outputs escaped, no secrets/keys/credentials in the artefact, no unsafe third-party calls.
 - [ ] **Self-contained where promised** – a standalone artefact carries its CSS/JS embedded and runs without external setup.

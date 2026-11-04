@@ -1,10 +1,10 @@
 # ACCEPTANCE REVIEW
 
-> **Version 1.4** | 2026-10-16
+> **Version 1.12** | 2026-11-04
 
 How every skill proves its output meets its acceptance checklist. Read in full at the skill's REVIEW step. That step names this skill's own parts: its checks, any test or eval run and where it runs, and the final reviewer's model, rubric and announce noun. Everything else runs as written here.
 
-Cheaper checks first; never self-certify a fix – re-run the failed check; never review your own work alone.
+Cheaper checks first; never self-certify a fix – re-run the failed check, a P3 fix aside (`§ ROUTE FINDINGS`); never review your own work alone.
 
 ---
 
@@ -15,7 +15,9 @@ The plan opened with the acceptance checklist – in the brief's `§ PLAN` where
 - `- [ ] A<n> <criterion> – OPEN: <what is missing>`;
 - closed by `Verdict: all <n> met` or `Verdict: <m> of <n> open`.
 
-The final review writes it, every item, one by one; an unticked item is a P1. The final independent review writes it where one runs; *ELSE* your own integrated review writes it.
+**No proof, no tick** – an item's proof is written beside it before it is ticked. *IF an item is ticked with no proof, or with one that is not an observation* → it is open, wherever the checklist is read: rewrite it `- [ ] A<n> <criterion> – OPEN: no proof` in your own record and count it in the verdict.
+
+The final review writes the checklist, every item, one by one; an unticked item is a P1. The final independent review writes it where one runs; *ELSE* your own integrated review writes it.
 
 ---
 
@@ -32,7 +34,7 @@ The final review writes it, every item, one by one; an unticked item is a P1. Th
 
 ## INDEPENDENT REVIEW
 
-*IF the plan's Reviews setting includes the final review* → dispatch ONE `revenue-diy:reviewer` on the INTEGRATED whole – announce **`Reviewer (<model>): <the announce noun the skill's REVIEW step names>`** – with `{brief:[the work-log item, or brief.md], task:[its acceptance checklist – review the integrated whole against the rubric and tick every item in the format § THE ACCEPTANCE CHECKLIST sets], target:[the integrated artefacts], rubric:[the rubric the skill's REVIEW step names + the acceptance checklist and its tick format, verbatim], review:[a new report in <scratch> named review_final]}`. The model is the one the plan set for reviews, else the default the skill's REVIEW step names. A re-run's report is named `review_final_<k>`.
+*IF the plan's Reviews setting includes the final review* → dispatch `revenue-diy:reviewer` on the INTEGRATED whole, its target cut into units by `workflows/plan.md` § 5 item 3 like any other work – ONE reviewer per unit, a whole that fits one unit going to ONE reviewer – announce **`Reviewer (<model>): <the announce noun the skill's REVIEW step names>`** – with `{brief:[the work-log item, or brief.md], task:[its acceptance checklist – review the integrated whole, or this unit's part and the seams given to it, against the rubric and tick every item given to it, in the format § THE ACCEPTANCE CHECKLIST sets], target:[the integrated artefacts], rubric:[the rubric the skill's REVIEW step names + the acceptance checklist and its tick format, verbatim], review:[a new report in <scratch> named review_final], context_files:[the modules the rubric rests on]}`. The model and any effort are the ones the plan set for reviews, else the default the skill's REVIEW step names. A re-run's report is named `review_final_<k>`. With several units, write the cut – in `§ PLAN` where the brief is open, otherwise in the reply – before any unit goes out: the units together cover the whole target (for a code change, the whole diff), every changed file in exactly one unit; every seam – an interface one unit changes and another reads – is named and given to exactly one unit; every checklist item `A<n>` is given to exactly one unit. Every unit is a reviewer that did not build the work, on the model and any effort set for reviews. Each unit reviews its part and the seams given to it, ticks exactly the items given to it, and names its report `review_final_u<n>` (its re-run `review_final_u<n>_<k>`). Together the unit reports are the pass's one checklist: an item no unit ticked is a P1.
 
 THEN, always: review the INTEGRATED whole yourself against the brief – seams, consistency, decision distribution. *IF per-phase or per-item reviews ran* → your pass is about the seams rather than the pieces. *IF no independent review ran* → say so at WRAP-UP, so the user knows what the output was and was not judged by.
 
@@ -41,15 +43,18 @@ THEN, always: review the INTEGRATED whole yourself against the brief – seams, 
 ## ROUTE FINDINGS
 
 P1 blocks · P2 should fix · P3 nice.
+
+**Class every finding SURFACE or TOOLING.** SURFACE is the thing being shipped; TOOLING is what helped build or prove it – test harnesses, proving scripts and test helpers. A TOOLING finding is P3 by default; a tooling defect that hides a surface defect makes the hidden surface defect the finding, classed SURFACE at its own severity, and a surface defect is never down-rated because the tooling found it. Weak evidence that a check ran – a bare "checked by hand", no screenshot or log, a check script that crashed – is TOOLING, P3, when the shipped surface is verified correct; it is SURFACE only when it leaves a surface defect unfound.
+
 - **Wrong or missing runtime inputs** → fix, re-run.
 - **Impeaches a locked input** → STOP and report to the user.
-- **P1 / P2** → fixed per the skill's Execution rules, then this review re-runs.
-- **P3** → a trivial fix, or reported at WRAP-UP.
+- **P1 / P2** → fixed per the skill's Execution rules, then the final review re-runs in full.
+- **P3** → fixed straight away, with no re-review.
 - **Outside this work's acceptance** → a follow-up, named in the report and put in `<worklog>`, never left only in a review report.
 
-**An edit after the final review re-runs it** – any change to the output after the final review, by a worker or by you, runs the final review again before the report. A P3 or a point the final review raises may be fixed by you rather than its agent, on that condition. A fix-then-re-run loop runs at most two re-runs, and a new P3 a re-run raises is reported, not fixed again.
+**An edit after the final review re-runs it** – any change to the output after the final review but a P3 fix, by a worker or by you, runs the final review again, in full, before the report: round after round, while it finds a P1 or P2. A P3 or a point the final review raises may be fixed by you rather than its agent.
 
-Log every review with `F<n>` IDs and verdicts – in the brief's `§ REVIEW RESULTS` where the brief is open, otherwise in the reply.
+Log every review with `F<n>` IDs, classes and verdicts – in the brief's `§ REVIEW RESULTS` where the brief is open, otherwise in the reply.
 
 ---
 
@@ -62,5 +67,5 @@ When the routing closes, write your own integrated review – with the ticked ch
 ## REVIEW QUALITY GATES
 
 ✅ Self-checks pass, decision table built, your own integrated review done?
-✅ Every finding fixed and re-verified, or named as a follow-up; all logged as `F<n>`; every review report in `<worklog>`?
-✅ The last pass's acceptance checklist covers every item, each ticked with its proof or named as open, and no edit to the output came after it?
+✅ Every finding fixed – a P1 or P2 re-reviewed – or named as a follow-up; all logged as `F<n>`; every review report in `<worklog>`?
+✅ The last pass's acceptance checklist – across all its unit reports where the review was cut – covers every item exactly once, each ticked with its proof or named as open, and no edit to the output but a P3 fix came after it?

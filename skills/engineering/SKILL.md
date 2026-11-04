@@ -6,8 +6,8 @@ tier: complex
 status: built
 origin: baseline
 license: "Copyright Revenue DIY Ltd. Licensed under PolyForm Shield 1.0.0 – see LICENSE.txt in this folder. Use and adapt it for your own business; do not sell it or use it to provide a competing product."
-version: "1.67"
-generated: { at: "2026-10-16T21:13:47+01:00" }
+version: "1.83"
+generated: { at: "2026-11-04T11:29:12+00:00" }
 type: skill
 ---
 
@@ -24,14 +24,16 @@ THE technical skill. Automation is code: a workflow, a script, an app and a fix 
 ✅ **ALWAYS resolve HOW to build through three layers** – skill defaults ← the engineering conventions `OPERATIONS.md` points at (optional) ← repo or project rules. Degrade to safe defaults when a layer is absent.
 ✅ **ALWAYS verify empirically before declaring done** – a green validator is not proof; open it in the platform's own UI; an edit made through an MCP can be a draft until published – verify the active version.
 ✅ **ALWAYS ship artefact + documentation** – what it does, how it's built, how to run or host it, how to change it. Never a black box.
-✅ **ALWAYS capture every finding** – every bug, gap or risk you or an agent meet while working gets an `F<n>` line – in the brief's `§ REVIEW RESULTS` where the brief is open, otherwise in the reply. Inside this work's scope → fixed in this build, before it ships. Outside it → a follow-up put in `<worklog>`, linking back to this work. The final report lists every finding as filed (its reference), fixed in this change, or ruled out (why).
+✅ **ALWAYS capture every finding** – every bug, gap or risk you or an agent meet while working gets an `F<n>` line, classed SURFACE or TOOLING (`§ 4.2`) – in the brief's `§ REVIEW RESULTS` where the brief is open, otherwise in the reply. Inside this work's scope → fixed in this build, before it ships. Outside it → a follow-up put in `<worklog>`, linking back to this work. The final report lists every finding as filed (its reference), fixed in this change, or ruled out (why).
+✅ **ALWAYS read the specs before the first change** – the Spec-first reads `§ THIS SKILL'S PART` sets, `simple fix` included, come before the first change, whatever tool makes it; the brief and the work log do not count.
+✅ **ALWAYS run an independent final review on every route except `simple fix`** – its target cut into reviewer units by `workflows/acceptance-review.md` § INDEPENDENT REVIEW; the do-it-myself route and small work included; you never review your own work alone (`§ 4.2`).
 ✅ **ALWAYS save the DELIVERABLE in the work folder** – the folder this session works in, named by its full path; `<scratch>` holds working files only; a deliverable under a temp path is not delivered.
 ✅ **ALWAYS keep every decision labelled** – `D<n> (topic) – text`, never a bare ID.
 ✅ **ALWAYS dispatch by literal type** – `revenue-diy:worker`, `revenue-diy:researcher`, `revenue-diy:reviewer`, `revenue-diy:tester`; never a generic agent, except one that loads a skill the work must follow. Announce each dispatch as you make it: **`Worker (<model>): <one-line task>`** – same string in the description field.
 ✅ **ALWAYS answer once** – no text while any agent is out, in any stage.
-❌ **NEVER default below sonnet** – mechanical work runs sonnet; haiku only when the user picks it.
+❌ **NEVER default outside the model matrix** – each agent runs on its row's model and effort unless the user picks another.
 ❌ **NEVER weaken a check to pass it** – a failing test, validator or acceptance line is fixed in the work, never loosened, skipped or reworded to go green.
-❌ **NEVER over-engineer** – build the simplest thing that works; for every mechanism nobody asked for, ask what breaks without it and how likely that is; a one-off never gets its own tooling – it uses what already exists.
+❌ **NEVER over-engineer** – build the simplest thing that works; for every mechanism nobody asked for, ask what breaks without it and how likely that is; a one-off never gets its own tooling – it uses what already exists, or a throwaway script in `<scratch>`, never a reusable tool, check or self-test; a problem in how something is set up is fixed in the setup, never by making the system detect it.
 ❌ **NEVER leave dead code** – a retired feature is removed, never left switched off: its code, UI, data columns, config, tests and docs go in the same change, or in a follow-up put in `<worklog>`. Inert values, hidden columns, flags pinned off and "kept for later" branches are dead code; one found in review is removed in this build when it is in scope, else filed and scheduled – never just noted.
 ❌ **NEVER hardcode vendor or client specifics** – tools resolve by tag; deploy mechanics via the conventions or repo rules.
 ❌ **NEVER over-promise the boundary** – complex, integrated, maintained or monitored systems are a Custom engagement; this skill builds self-serve artefacts and walks the user through hosting them.
@@ -137,7 +139,7 @@ System archaeology:
 1. **Analyse targets** – read the target files or artefacts in full (never from memory).
 2. **Check direct references** – one hop max.
 3. **Find related files** – search the repository or folder for the target names.
-4. **Check conventions** – *IF the connector is present* → the documentation and engineering conventions `OPERATIONS.md` points at, for the parts this task touches. These are the build rules – standards, testing expectations, deploy rules, platform notes – read with any repo or project rules in scope; absent → "safe defaults apply".
+4. **Check conventions** – *IF the connector is present* → the documentation and engineering conventions `OPERATIONS.md` points at, for the parts this task touches. These are the build rules – standards, testing expectations, deploy rules, platform notes – read with any repo or project rules in scope; absent → "safe defaults apply". `§ THIS SKILL'S PART` reads the documentation conventions again at PLAN, so a design-clear run still reads them.
 5. **Map the system** – how the surrounding code or platform works, prior implementations to follow, which files change. *IF unfamiliar or large* → research it as an unknown at `§ RESEARCH AND INTERVIEW`.
 6. **Discover test coverage** – what testing documentation exists and what this change owes it.
 7. **Check freshness** – *IF a dated fact looks stale* (a token, a URL, a version pin) → flag it and offer to refresh it.
@@ -146,7 +148,7 @@ System archaeology:
 
 ### 1.4 RESEARCH AND INTERVIEW
 
-READ `workflows/design-interview.md` NOW – NEVER skip this step.
+READ `workflows/design-interview.md` and `workflows/model-matrix.md` NOW – NEVER skip this step.
 
 ### DESIGN STAGE QUALITY GATES
 
@@ -156,14 +158,22 @@ READ `workflows/design-interview.md` NOW – NEVER skip this step.
 
 ## STEP 2: PLAN
 
-READ `workflows/plan.md` NOW – NEVER skip this step. `§ THIS SKILL'S PART` runs on top of it.
+READ `workflows/plan.md` and `workflows/model-matrix.md` NOW – NEVER skip this step. `§ THIS SKILL'S PART` runs on top of them.
 
 ### 2.1 THIS SKILL'S PART
 
-- **Work-item fields** – each item is buildable, reviewable and observable (one module, one feature, one integration, one workflow) and names its **landing** – how it becomes observable: a dev environment per the conventions, a Claude artifact preview, the files themselves. `complex` = code, logic, integrations; `mechanical` = docs, sweeps, config copies, test scaffolding. Parallel by default: an item waits for another only where they truly collide – the same file, the same workflow, or one repo-wide step (a deploy, a merge).
+- **Spec-first** – ALWAYS, before any work item, `simple fix` included:
+  - **Look** – read the documentation conventions `OPERATIONS.md` points at, meaning its documentation section, or the module the served index lists for documentation. Use `get_context` with `{"skill": "engineering", "files": ["PRINCIPLES.md", <that module>]}` when it is not already in your context.
+  - *IF they say where a system's behaviour docs live* → for each system the task changes, read its behaviour doc and its testing doc in full. Then:
+    - **Behaviour doc first** – the first work item writes the change into it, or creates it where the conventions expect one and none exists.
+    - **Testing doc second** – the next writes the scenarios the change owes into it, edge cases included.
+    - **Then the build** – only then come the build items.
+    - **In `fix` mode** – the behaviour doc is the spec the fix restores. It stays as it is unless it is wrong, which is a design topic for the user. The regression scenario goes into the testing doc before the code changes.
+  - *ELSE* → no doc work items.
+- **Work-item fields** – each item is buildable, reviewable and observable (one module, one feature, one integration, one workflow) and names its **landing** – how it becomes observable: a dev environment per the conventions, a Claude artifact preview, the files themselves. Parallel by default: an item waits for another only where they truly collide – the same file, the same workflow, or one repo-wide step (a deploy, a merge).
 - **Tooling** – the capabilities to probe: testing, browser automation, the automation platform, CMS, hosting, repo access. A must-have one missing → the plan states the degradation (file output, the manual walkthrough).
 - **Documentation plan** – what the artefact owes per the documentation conventions `OPERATIONS.md` points at, plus testing docs where the engineering conventions require them.
-- **Sub-briefs** – the top of every sub-brief carries `§ Standards every build meets`. Its Review section names the rubric `assets/checklist.md § CODE / ARTEFACT REVIEW` plus the conventions, chunked by module above 400 changed lines or 6 files – never one file across reviewers. Its Testing section names the scenarios, derived per `workflows/testing.md § DERIVE THE TEST CASES`, and is written only for a phase complete on its own. A trivial phase (under 100 changed lines, one file, no security surface) carries no Review section; a one-phase plan carries neither – `§ STEP 4: REVIEW` still runs in full.
+- **Sub-briefs** – the top of every sub-brief carries `§ Standards every build meets` and the `context_files` slot of the agents it briefs. That slot holds the same modules their dispatch carries, because an agent loads its context before it reads the brief. A sub-brief for work in a repository tells its agent to work in the worktree its dispatch gave it, and never to make one itself. Its Review section names the rubric `assets/checklist.md § CODE / ARTEFACT REVIEW` plus the conventions, chunked by module above 400 changed lines or 6 files – never one file across reviewers. Its Testing section names the scenarios, derived per `workflows/testing.md § DERIVE THE TEST CASES`, and is written only for a phase complete on its own. A trivial phase (under 100 changed lines, one file, no security surface) carries no Review section; a one-phase plan carries neither – `§ STEP 4: REVIEW` still runs in full.
 - **Testing** – the test plan locked at DESIGN, run per `workflows/testing.md`.
 - **Simple path** – `simple fix`: the plan is the acceptance checklist alone – no route, no box, no other plan; the user's approval of the fix in prose is the plan approval. Put the brief, where open, in `<worklog>` and GO to `§ STEP 3: EXECUTE`.
 - **Simple-path checklist** – on `simple fix`, the acceptance checklist goes to the user numbered `A1…An`, and the self-tick ticks every item as `- [x] A<n> <criterion> – <proof>` (or `- [ ] A<n> <criterion> – OPEN: <what is missing>`), never a sweep. A fact the task needs is read from the file the served index lists for it before it is called unknown: a limit on which facts the user wants shown never limits which files are read to state them correctly.
@@ -174,13 +184,15 @@ The engineering conventions (named in `context_files` on a sub-brief) → repo r
 
 ### 2.2 SET EXECUTION PREFERENCES
 
+**Worker defaults** – code, logic, integrations, test scaffolding → `code`; docs, sweeps and config copies that are not code → `mechanical`; the recommended Models answer applies them, unless the model matrix puts a unit on its `complex` row.
+
 *IF the work-log item the task started from carries a `## Execution settings` section* → it answers `workflows/plan.md § THE QUESTION BOX` and nothing is asked: "Use the recommended defaults." → every recommended value; otherwise each line sets its question in the box's words (`Models: Sonnet`, `Sequence: sequential`, `Reviews: final only`, `Testing: final only`), and every question it leaves out takes its recommended value. `§ PLAN` records the answers and names the section as their source.
 
 Added to `workflows/plan.md § THE QUESTION BOX`: no question – its Testing question gains **Manual walkthrough** – I guide you through it; also the answer when no testing tool is reachable.
 
 ### PLAN STAGE QUALITY GATES
 
-✅ Every gate in `workflows/plan.md` passed; every work item with its landing, and the documentation plan written (`simple fix`: the checklist alone)?
+✅ Every gate in `workflows/plan.md` passed; the Spec-first reads done, and any behaviour-doc and testing-doc items ahead of the build items; every work item with its landing, and the documentation plan written (`simple fix`: the Spec-first reads and the checklist alone)?
 
 ---
 
@@ -195,28 +207,36 @@ Goal: **deliver the approved plan**.
 4. **Blocked** – finish everything not blocked first; then ONE call to your question tool, naming the decision. *IF a push-notification tool is in your tools* → send one push before the question.
 5. **Progress write** – on completing each work item: where the brief is open, flip its key and add one evidence line in `§ PROGRESS TRACKING` (otherwise the evidence line goes in the reply); mirror the task-list tool if present; one-line status – the item is not closed until written.
 6. **A topic raised here is a late topic** – READ `workflows/design-interview.md` NOW – NEVER skip this step – and take it under its `§ INTERVIEW THE USER` rule 6 at the next natural pause.
-7. **Fix rounds** – a P1 or P2 finding is fixed, then the check that found it re-runs, writing a new report, never over a finished one. **Three failed fix rounds on one finding → stop and ask the user**, naming what was tried. Work you did yourself, you fix. Agents report only to you, never to each other: an agent's finding goes back to the SAME agent – resume it with the finding, so it fixes with the context it holds; a new agent takes it only when the fix will not fit in the room left. A P3, or a point the final review raises, you may fix yourself, on condition that the final review runs again afterwards.
+7. **Fix rounds** – a P1 or P2 finding is fixed, then the check that found it re-runs – for the final review, as `workflows/acceptance-review.md` § ROUTE FINDINGS sets – writing a new report, never over a finished one. **Three failed fix rounds on one finding → stop and ask the user**, naming what was tried. Work you did yourself, you fix. Agents report only to you, never to each other: an agent's finding goes back to the SAME agent as a fix round of its own unit – resume it with the finding, so it fixes with the context it holds – only while its fix rounds, this one included, fit inside the room `workflows/plan.md` § 5 item 3 leaves for fix rounds; otherwise a fresh agent takes the fix, with the same brief and the existing report path. A P3, or a point the final review raises, you may fix yourself, routed as that section sets. *IF a unit of the model matrix's `code` row meets that matrix's **Code redo** trigger, the final review's points included* → never resume its agent or fix it yourself: a fresh agent on that redo's model and effort takes the fix, with the same brief, the findings and the existing report path.
 8. **Run when ready** – work is ordered by dependency, never by a clock: a blocked item names what it waits on and starts when that lands, and waiting on a running job is a state check, never a fixed sleep.
 
 ### 3.1 DISPATCH THE WORK
 
-*IF the plan took the do-it-myself route* → do every work item yourself, to `§ Standards every build meets`, in sequence, closing each per execution rule 5 once it is observable at its landing (`§ Make it observable`); this loop does not run.
+*IF the plan took the do-it-myself route* → do every work item yourself, to `§ Standards every build meets`, in sequence, closing each per execution rule 5 once it is observable at its landing (`§ Make it observable`); this loop does not run. The final review still runs, per `ALWAYS run an independent final review on every route except simple fix`.
 
-**Sequence and models** – the box answers and each unit's model, as `§ PLAN` records them.
+**Sequence and models** – the box answers and each agent's model and any effort, as `§ PLAN` records them.
 
-**Every dispatch carries three fields:** `brief` – the phase's sub-brief, as its link in `<worklog>` or its full path; `task` – one line naming the part of it the agent runs; and its output path – the full path of a new report in `<scratch>`, named by phase and stage.
+**Every dispatch carries four fields:**
+- `brief` – the phase's sub-brief, as its link in `<worklog>` or its full path;
+- `task` – one line naming the part of it the agent runs;
+- its output path – the full path of a new report in `<scratch>`, named by phase and stage;
+- `context_files` – the slot: the context modules the agent loads on top of its default `OPERATIONS.md`, named as the index lists them. The same value goes in the sub-brief's top.
 
-| Agent | Fields | Optional fields | Never – no sub-brief asks it to |
-|---|---|---|---|
-| `revenue-diy:worker` | `brief`, `task`, `progress` | `context_files` (the engineering-convention modules the unit follows, named as the index lists them), `references` | edit the brief or the work-log item, close the work-log item or change its status, act on scope the brief does not hold, open a credential or key file the brief does not name |
-| `revenue-diy:reviewer` | `brief`, `task`, `review` | `target`, `rubric`, `context_files`, `references` | fix anything – it judges; the worker fixes |
-| `revenue-diy:tester` | `brief`, `task`, `progress` | `scenarios`, `conventions`, `context_files`, `references` | fix anything or edit a scenario – a scenario that needs changing is a finding |
+| Agent | Fields | `context_files` – by role | Optional fields | Never – no sub-brief asks it to |
+|---|---|---|---|---|
+| `revenue-diy:worker` | `brief`, `task`, `progress`, `context_files` | A build worker gets the engineering-convention modules its unit follows. A documentation worker gets the documentation module the index lists. | `references` | edit the brief or the work-log item, close the work-log item or change its status, act on scope the brief does not hold, open a credential or key file unless the brief quotes the user's own request for that exact file |
+| `revenue-diy:reviewer` | `brief`, `task`, `review`, `context_files` | The modules its rubric rests on. A code reviewer gets the engineering conventions; a test-plan reviewer gets the testing-conventions module the index lists. | `target`, `rubric`, `references` | fix anything – it judges; the worker fixes |
+| `revenue-diy:tester` | `brief`, `task`, `progress`, `context_files` | The testing-conventions module the index lists. | `scenarios`, `conventions`, `references` | fix anything or edit a scenario – a scenario that needs changing is a finding |
+
+A slot the index has nothing for stays empty (`[]`); a role needs no module beyond `OPERATIONS.md` there.
+
+**Agents in one repository** – *IF two or more agents will change one repository at once* → each works in its own worktree, made only with Claude Code's own tools: dispatch each with your agent tool's `isolation: "worktree"`, and for your own work in a session use `EnterWorktree` / `ExitWorktree`. Never a bare `git worktree add`. The worktree rule in the engineering conventions `OPERATIONS.md` points at says where worktrees live and when they go. *IF those tools are absent* → follow that rule's fallback; with no such rule, run the agents in that repository one at a time.
 
 **FOR EACH phase – independent phases run side by side, as many at once as the Sequence answer allows, and a phase that waits on another starts when that one closes; the loop closes on the progress write:**
 1. **Re-anchor** – re-read the brief's `progress:` keys; take every phase with a key still `false` that waits on nothing still open.
-2. **Work** – dispatch one `revenue-diy:worker` per unit – **`Worker (<model>): <one-line task>`** – `{brief, task:[unit <n> of the Execution section], progress:[<phase>_work_<n>], context_files}`.
+2. **Work** – dispatch one `revenue-diy:worker` per unit – **`Worker (<model>): <one-line task>`** – `{brief, task:[unit <n> of the Execution section], progress:[<phase>_work_<n>], context_files:[the engineering-convention modules the unit follows]}`.
 3. **Read the outcome** – every agent ends on **done**, **done with concerns** or **blocked**. Done → verify it against the sub-brief's done criteria and make it observable at its landing (`§ Make it observable`); never accept a pass claim without the observed output. Done with concerns → weigh each concern; one that touches an acceptance line is a finding. Blocked → give it what it names and resume it, or ask the user when only they can.
-4. **Review, then test** – *IF the Reviews answer includes per-phase review and the sub-brief has a Review section* → `revenue-diy:reviewer` – **`Reviewer (<model>): <phase>`** – `{brief, task:[the Review section, which names the target and rubric], review:[<phase>_review], context_files}`. *IF the Testing answer includes per-phase tests and the sub-brief has a Testing section* → READ `workflows/testing.md` NOW – NEVER skip this step – and run its `§ Dispatched runs` – **`Tester (<model>): <phase>`** – `{brief, task:[the Testing section, which names the scenarios], progress:[<phase>_test]}`.
+4. **Review, then test** – *IF the Reviews answer includes per-phase review and the sub-brief has a Review section* → `revenue-diy:reviewer` – **`Reviewer (<model>): <phase>`** – `{brief, task:[the Review section, which names the target and rubric], review:[<phase>_review], context_files:[the modules its rubric rests on]}`. *IF the Testing answer includes per-phase tests and the sub-brief has a Testing section* → READ `workflows/testing.md` NOW – NEVER skip this step – and run its `§ Dispatched runs` – **`Tester (<model>): <phase>`** – `{brief, task:[the Testing section, which names the scenarios], progress:[<phase>_test], context_files:[the testing-conventions module the index lists]}`.
 5. **Route findings** – per execution rule 7.
 6. **Record** – put each report in `<worklog>` as it lands. A phase is not closed, and nothing that waits on it is dispatched, until its reports are there; independent phases still run side by side.
 7. **Progress write** – per execution rule 5, for every work item in the phase.
@@ -225,7 +245,7 @@ Goal: **deliver the approved plan**.
 
 **An agent is running until its own completion notice arrives** – a report at `status: in_progress` is work in flight; never re-dispatch or touch its files.
 
-*`test` mode:* EXECUTE = READ `workflows/testing.md` NOW – NEVER skip this step – and run its `§ Dispatched runs` against the scoped coverage – **`Tester (<model>): <scope>`** – `{brief:[the work-log item, or brief.md], task:[the scoped coverage], progress:[<scope>_test]}`; a main-thread FAIL → READ `workflows/debugging.md` NOW – NEVER skip this step. *`fix` mode:* EXECUTE = apply the approved fix + check the blast radius (what else touches the path).
+*`test` mode:* EXECUTE = READ `workflows/testing.md` NOW – NEVER skip this step – and run its `§ Dispatched runs` against the scoped coverage – **`Tester (<model>): <scope>`** – `{brief:[the work-log item, or brief.md], task:[the scoped coverage], progress:[<scope>_test], context_files:[the testing-conventions module the index lists]}`; a main-thread FAIL → READ `workflows/debugging.md` NOW – NEVER skip this step. *`fix` mode:* EXECUTE = the regression scenario first, where `§ THIS SKILL'S PART` Spec-first found a testing doc; then apply the approved fix + check the blast radius (what else touches the path).
 
 #### Make it observable
 
@@ -239,7 +259,7 @@ Per the item's landing: static self-contained HTML → a browser at `file:///<ab
 
 ✅ Every work item implemented and verified against its acceptance lines (evidence read)?
 ✅ Every work item closed with an evidence line – its `progress:` key `true` where the brief is open?
-✅ Every agent report in `<worklog>`; every finding fixed, or asked about after three failed rounds?
+✅ Every agent report in `<worklog>`; every finding fixed or routed as `§ 4.2` sets, or asked about after three failed rounds?
 ✅ Every item observed at its landing, its documentation written alongside?
 
 ---
@@ -248,7 +268,7 @@ Per the item's landing: static self-contained HTML → a browser at `file:///<ab
 
 Goal: **prove the integrated result works and meets every acceptance line** – empirically first, then by judgement.
 
-**The end-to-end test opens this step** – *IF the plan's Testing setting includes a final test (Manual walkthrough included)* → READ `workflows/testing.md` NOW – NEVER skip this step – and run its `§ Dispatched runs` over the integrated whole – **`Tester (<model>): end-to-end`** – `{brief:[the work-log item, or brief.md], task:[its acceptance checklist], scenarios:[this skill's end-to-end scenarios, over the integrated whole], progress:[final_test]}`. On Manual walkthrough, or with no testing tool, guide the user through the walkthrough instead. A failure is a finding: READ `workflows/debugging.md` NOW – NEVER skip this step – then route it per execution rule 7 and re-run the failed cases.
+**The end-to-end test opens this step** – *IF the plan's Testing setting includes a final test (Manual walkthrough included)* → READ `workflows/testing.md` NOW – NEVER skip this step – and run its `§ Dispatched runs` over the integrated whole – **`Tester (<model>): end-to-end`** – `{brief:[the work-log item, or brief.md], task:[its acceptance checklist], scenarios:[this skill's end-to-end scenarios, over the integrated whole], progress:[final_test], context_files:[the testing-conventions module the index lists]}`. On Manual walkthrough, or with no testing tool, guide the user through the walkthrough instead. A failure is a finding: READ `workflows/debugging.md` NOW – NEVER skip this step – then route it per execution rule 7 and re-run the failed cases.
 
 READ `workflows/acceptance-review.md` and `assets/checklist.md` NOW – NEVER skip this step. This skill's parts of it:
 
@@ -261,13 +281,13 @@ READ `workflows/acceptance-review.md` and `assets/checklist.md` NOW – NEVER sk
 
 ### 4.2 INDEPENDENT REVIEW
 
-The final reviewer: default model opus; rubric `assets/checklist.md § FINAL SWEEP`, at architecture altitude – plus `§ CODE / ARTEFACT REVIEW` when no per-phase review ran (Final only, a one-phase plan, or the do-it-myself route); announce noun `integrated build`.
+The final reviewer, due per `ALWAYS run an independent final review on every route except simple fix`, by default the model matrix's review rows, their model and effort, at architecture altitude: `revenue-diy:reviewer` – **`Reviewer (<model>): integrated build`** – `{brief:[the work-log item, or brief.md], task:[its acceptance checklist – review the integrated whole against the rubric and tick every item], target:[the integrated artefacts], rubric:[assets/checklist.md § FINAL SWEEP, plus § CODE / ARTEFACT REVIEW when no per-phase review ran (Final only, a one-phase plan, or the do-it-myself route), plus the acceptance checklist and its tick format], review:[a new report in <scratch> named review_final], context_files:[the engineering-convention modules the build followed]}`. Its target is cut into units by `workflows/acceptance-review.md` § INDEPENDENT REVIEW; with several units this line goes out once per unit, its `task` that unit's part, seams and checklist items, its `review` `review_final_u<n>`.
 
-*IF a test plan ran* → also ONE `revenue-diy:reviewer` – **`Reviewer (<model>): test plan`** – `{brief:[the work-log item, or brief.md], task:[judge the test plan and its evidence], target:[the test plan + every evidence file], rubric:[assets/checklist.md § TESTING REVIEW], review:[test_review]}`.
+*IF a test plan ran* → also ONE `revenue-diy:reviewer` – **`Reviewer (<model>): test plan`** – `{brief:[the work-log item, or brief.md], task:[judge the test plan and its evidence], target:[the test plan + every evidence file], rubric:[assets/checklist.md § TESTING REVIEW], review:[test_review], context_files:[the testing-conventions module the index lists]}`.
 
-**Findings** – a P3 inside this work's scope is fixed in this build, never only reported, except a new P3 a re-run raises (below).
+**Findings** – every `F<n>` and every reviewer finding carries its class: SURFACE, the thing being shipped, or TOOLING – test harnesses, proving scripts and test helpers. A TOOLING finding is P3 by default; a tooling defect that hides a surface defect makes the hidden surface defect the finding, classed SURFACE at its own severity, and a surface defect is never down-rated because the tooling found it. Weak evidence that a check ran – a bare "checked by hand", no screenshot or log, a check script that crashed – is TOOLING, P3, when the shipped surface is verified correct; it is SURFACE only when it leaves a surface defect unfound.
 
-**An edit after the final review re-runs it** – any change to the output after the final review, by a worker or by you, runs the final review again before the report. A fix-then-re-run loop runs at most two re-runs, and a new P3 a re-run raises is reported, not fixed again.
+**Routing** – every finding, and every edit after the final review, is routed as `workflows/acceptance-review.md` § ROUTE FINDINGS sets; a re-run reuses the final reviewer's dispatch line in `§ 4.2`, `context_files` included; only its `review` path is new.
 
 ### REVIEW STAGE QUALITY GATES
 
@@ -280,9 +300,9 @@ The final reviewer: default model opus; rubric `assets/checklist.md § FINAL SWE
 
 Goal: **hand off a working, documented, hosted artefact, close the run, capture what should outlive the session.** Order is mechanical.
 
-### 5.1 FINALISE
+### 5.1 FINALISE DOCUMENTATION
 
-1. Finish documentation per the documentation conventions `OPERATIONS.md` points at; *IF it touches more than 2 files* → `revenue-diy:worker` – **`Worker (<model>): documentation`** – `{brief:[the work-log item, or brief.md], task:[the documentation the plan names], progress:[final_docs]}`. The documentation is what `ALWAYS ship artefact + documentation` names; *IF the engineering conventions require testing docs* → the test plan is folded into them. You review a worker's documentation before it closes.
+1. Finish documentation per the documentation conventions `OPERATIONS.md` points at; *IF it touches more than 2 files* → `revenue-diy:worker` – **`Worker (<model>): documentation`** – `{brief:[the work-log item, or brief.md], task:[the documentation the plan names], progress:[final_docs], context_files:[the documentation module the index lists]}`. The documentation is what `ALWAYS ship artefact + documentation` names; *IF the engineering conventions require testing docs* → the test plan is folded into them. You review a worker's documentation before it closes.
 2. **The final report** – write the `§ REPORT TO USER` text to a new report in `<scratch>` named `final_summary` and put it in `<worklog>`; then check that every report in `<scratch>` is in `<worklog>`, and put any that is not.
 3. **An open item stops the wrap-up** – *IF the last acceptance checklist has an open item* → fix what can be fixed now (GO back to `§ STEP 3: EXECUTE`); whatever is still open is named in the report and in `<worklog>`; the work-log item, where one exists, stays open, and the brief, where open, stays `in_progress`. *ELSE* → where the brief is open, set its `status: completed`.
 4. **Close the work-log item** – *IF `<worklog>` is a work log and holds an item for this run* → close it as `OPERATIONS.md` instructs.
@@ -290,7 +310,7 @@ Goal: **hand off a working, documented, hosted artefact, close the run, capture 
 
 ### 5.2 REPORT TO USER
 
-One message: **work done** · **test and review results** (fix loops included; the acceptance checklist's verdict) · **findings** (every `F<n>`: filed with its reference, fixed in this change, or ruled out with why) · **output and documentation** (links) · **follow-ups** (open acceptance items first; P3s; a named skill the task outgrew into, e.g. `revenue-diy:designing-landing-pages`; the Custom route for deploy-and-maintain asks). Always before go-live and before any dialog.
+One message, printed in the reply – `final_summary` is its record, never its delivery: **work done** · **test and review results** (fix loops included; the acceptance checklist's verdict) · **findings** (every `F<n>`: filed with its reference, fixed in this change, or ruled out with why) · **output and documentation** (links) · **follow-ups** (open acceptance items first; a named skill the task outgrew into, e.g. `revenue-diy:designing-landing-pages`; the Custom route for deploy-and-maintain asks). Always before go-live and before any dialog.
 
 ### 5.3 THE ITERATION LOOP
 
@@ -306,7 +326,9 @@ Then execute the recorded `Output` decision – never re-decide it: a repo or pl
 
 *IF Run it* → run the suite from the persisted docs ONLY (no session memory); a failure means the docs or the build are wrong – fix via `§ THE ITERATION LOOP` before the feedback dialog.
 
-### 5.5 FEEDBACK
+**Then clean up what waited for go-live** – once the landing is verified (and any suite run passed), clean up what `workflows/compound-knowledge.md`'s clean-up kept for go-live, by that file's rules; after **Not yet** it stays, as the report already names it.
+
+### 5.5 CAPTURE FEEDBACK
 
 In the message that settles go-live – after its landing is verified, or after **Not yet** – run `workflows/compound-knowledge.md § PART 2: AFTER THE REPORT – SAME MESSAGE`: its one call to your question tool is the last of the session.
 
@@ -314,5 +336,5 @@ In the message that settles go-live – after its landing is verified, or after 
 
 ✅ Documentation final, test plan persisted where required; the brief, where open, `completed` – or `in_progress` with every open acceptance item named; the work-log item, where one exists, closed as `OPERATIONS.md` instructs, or left open saying what is open?
 ✅ The final report and every other report in `<scratch>` in `<worklog>`?
-✅ Report delivered BEFORE go-live and BEFORE any dialog, listing every finding as filed, fixed or ruled out; go-live then confirmed and the landing verified, or explicitly deferred?
+✅ Report printed in the reply BEFORE go-live and BEFORE any dialog, listing every finding as filed, fixed or ruled out; go-live then confirmed and the landing verified, or explicitly deferred?
 ✅ `workflows/compound-knowledge.md` run in full, or its skip line printed?

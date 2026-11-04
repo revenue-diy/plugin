@@ -6,8 +6,8 @@ tier: standard
 status: built
 origin: baseline
 license: "Copyright Revenue DIY Ltd. Licensed under PolyForm Shield 1.0.0 – see LICENSE.txt in this folder. Use and adapt it for your own business; do not sell it or use it to provide a competing product."
-version: "3.45"
-generated: { at: "2026-10-18T02:48:06+01:00" }
+version: "3.57"
+generated: { at: "2026-11-04T11:29:12+00:00" }
 type: skill
 ---
 
@@ -24,11 +24,11 @@ The user's right-hand for messy decisions and odd jobs no named skill owns – a
 ✅ **ALWAYS ground the work in the business context** where the connector is present – fetch the modules the task needs; done for THIS business, never generic.
 ✅ **ALWAYS act as a thinking partner** – challenge assumptions, surface trade-offs, play devil's advocate; never a yes-man.
 ✅ **ALWAYS judge whether the task is worth doing** – pressure-test it against the business's goals, at design and whenever the work shows it; recommend SKIP when it doesn't earn the user's time.
-✅ **ALWAYS close every task with the four-part report, then the closing question-tool dialog** (save, then rating; never a prose ask; *IF the connector is absent* → the skip line, no dialog) – `§ REPORT TO USER`, `§ FEEDBACK`; on the full route, `review_integrated` first (`§ INDEPENDENT REVIEW`).
+✅ **ALWAYS close every task with the four-part report, then the closing question-tool dialog** (save, any workspace question, then rating; never a prose ask; *IF the connector is absent* → the skip line, no dialog) – `§ REPORT TO USER`, `§ CAPTURE FEEDBACK`; on the full route, `review_integrated` first (`§ INDEPENDENT REVIEW`).
 ✅ **ALWAYS keep every decision labelled** – `D<n> (topic) – text`, never a bare ID.
 ✅ **ALWAYS dispatch by literal type** – `revenue-diy:worker`, `revenue-diy:researcher`, `revenue-diy:reviewer`, `revenue-diy:tester`; never a generic agent, except one that loads a skill the work must follow. Announce each dispatch: **`Worker (<model>): <one-line task>`** – same string in the description field.
 ✅ **ALWAYS answer once** – no text while any agent is out, in any stage.
-❌ **NEVER default below sonnet** – mechanical work runs sonnet; haiku only when the user picks it.
+❌ **NEVER default outside the model matrix** – each agent runs on its row's model and effort unless the user picks another.
 ❌ **NEVER weaken a check to pass it** – fix the work; never loosen, skip or reword a failing test, validator or acceptance line.
 ❌ **NEVER dress thin content up as finished work** – if there's nothing real to say, say so.
 ❌ **NEVER persist a business fact outside the context system** – no local files, no memory tools; the connector is the only save path.
@@ -111,7 +111,7 @@ Goal: **full alignment on every `design input`**.
 **Missing-input note:** where a step's quality drops for lack of an input, say so ONCE, specifically; *IF the connector is present* (`§ CONNECT`'s finding, with or without a brief) → name the context system as where to add it. Never note an input the user supplied this session.
 
 *IF EDITING an existing artefact* → re-open only the inputs the change touches.
-A request that names no output or goal, or points at files without naming the decision or deliverable it wants, leaves Output and Acceptance open: those slots would be your words, not the user's. Answer it with a question, not a finished answer: one topic, your recommended default and its trade-off (what the default gives up), then one question in prose; the question tool is not used at DESIGN. That question opens the brief (`§ OPEN THE BRIEF`).
+A request that names no output or goal, or points at files without naming the decision or deliverable it wants, leaves Output and Acceptance open: those slots would be your words, not the user's. Answer it with a question, not a finished answer: first `§ AGENDA`, one row per open design input and per topic the user has raised, Output and Acceptance as row 1 (design-interview rule 2; worth-doing stays your own go, as in `D1 (design clear)`), then one topic – Output and Acceptance, and for whom – your recommended default and its trade-off (what the default gives up), then every question on what that topic's row names, together, in prose, never one on a fact of the work, nor an invitation to confirm, supply, correct, check or choose one: one a later row holds is named as that row's, one no row names is stated in the default as its assumption – nothing invented that the user, the files or the context did not give, and nothing stated against what they show (design-interview rule 3); the question tool is not used at DESIGN. The brief opens before that reply is sent (`§ OPEN THE BRIEF`).
 A choice the user hands over ("you work out…", "your call") is not missing: it is the session's to make, recorded as a `D<n>` line with its reason – and when every `MUST-HAVE` is answered in the user's words, the design-clear rule below still gives `D1 (design clear)`.
 *IF EVERY `MUST-HAVE` input but worth-doing is already answered – in the user's own words this session, in the work-log item the task started from, or by the artefact being edited* → write `**D1 (design clear)** – task & goal: <user's words>; worth-doing: <your one-line go, and why>; runtime inputs: <user's words>; output: <user's words>; acceptance: <user's words>` and state it to the user exactly as written, before anything is produced – into the brief's `§ DECISIONS` too where a brief is open – then GO to `§ STEP 2: PLAN`; *IF the user's message also names the whole deliverable* → end that line `FLAG simple task`. Any other slot you would fill in your own words is not answered – no `D1 (design clear)`. *ELSE* → no `D1 (design clear)`: run `§ READ & EVALUATE`, then `§ RESEARCH AND INTERVIEW`.
 
@@ -128,7 +128,7 @@ A choice the user hands over ("you work out…", "your call") is not missing: it
 
 ### 1.3 RESEARCH AND INTERVIEW
 
-READ `workflows/design-interview.md` NOW – NEVER skip this step.
+READ `workflows/design-interview.md` and `workflows/model-matrix.md` NOW – NEVER skip this step.
 
 ### DESIGN STAGE QUALITY GATES
 
@@ -138,7 +138,7 @@ READ `workflows/design-interview.md` NOW – NEVER skip this step.
 
 ## STEP 2: PLAN
 
-READ `workflows/plan.md` NOW – NEVER skip this step. `§ THIS SKILL'S PART` runs on top of it.
+READ `workflows/plan.md` and `workflows/model-matrix.md` NOW – NEVER skip this step. `§ THIS SKILL'S PART` runs on top of them.
 
 ### 2.1 THIS SKILL'S PART
 
@@ -168,7 +168,7 @@ Goal: **deliver the approved plan**.
 4. **Blocked** – finish everything not blocked first; then ONE call to your question tool, naming the decision.
 5. **Progress write** – on completing each work item: where the brief is open, flip its key and add one evidence line in `§ PROGRESS TRACKING` (otherwise the evidence line goes in the reply); mirror the task-list tool if present; one-line status – the item is not closed until written.
 6. **A topic raised here is a late topic** – READ `workflows/design-interview.md` NOW – NEVER skip this step – and take it under its `§ INTERVIEW THE USER` rule 6 at the next natural pause.
-7. **Fix rounds** – a P1 or P2 finding is fixed, then the check that found it re-runs, writing a new report, never over a finished one. **Three failed fix rounds on one finding → stop and ask the user**, naming what was tried. Work you did yourself, you fix. Agents report only to you: an agent's finding goes back to the SAME agent – resume it; a new agent only when the fix won't fit its room. A P3, or a point the final review raises, you may fix yourself, on condition that the final review runs again afterwards.
+7. **Fix rounds** – a P1 or P2 finding is fixed, then the check that found it re-runs – for the final review, as `workflows/acceptance-review.md` § ROUTE FINDINGS sets – writing a new report, never over a finished one. **Three failed fix rounds on one finding → stop and ask the user**, naming what was tried. Work you did yourself, you fix. Agents report only to you: an agent's finding goes back to the SAME agent – resume it – only while its fix rounds, this one included, fit inside the room `workflows/plan.md` § 5 item 3 leaves for fix rounds; otherwise a fresh agent, with the same brief and report path. A P3, or a point the final review raises, you may fix yourself, routed as that section sets.
 
 ### 3.1 DO THE WORK
 
@@ -180,15 +180,22 @@ Do every work item yourself, in sequence – the simplest solution that meets th
 
 The agents route runs here.
 
-**Sequence and models** – the box answers and each unit's model, as `§ PLAN` records them.
+**Sequence and models** – the box answers and each agent's model and any effort, as `§ PLAN` records them.
 
-**Every dispatch carries three fields:** `brief` – the phase's sub-brief (its `<worklog>` link or full path); `task` – one line naming the part the agent runs; and its output path – a new report in `<scratch>`, named by phase and stage.
+**Every dispatch carries four fields:**
+- `brief` – the phase's sub-brief (its `<worklog>` link or full path);
+- `task` – one line naming the part the agent runs;
+- its output path – a new report in `<scratch>`, named by phase and stage;
+- `context_files` – the slot: the context modules the agent loads on top of its default `OPERATIONS.md`, named as the index lists them. The same value goes in the sub-brief's top, because the agent loads before it reads the brief.
+  - A worker gets the modules the plan's context load names for its piece.
+  - A reviewer gets the modules its rubric rests on; for written content, that is the brand pillar the index lists.
+  - A slot with nothing to name stays empty (`[]`).
 
 **FOR EACH phase – independent phases side by side, as many as the Sequence answer allows; a phase that waits on another starts when that one closes:**
 1. **Re-anchor** – re-read the brief's `progress:` keys; take every phase with a key still `false` that waits on nothing still open.
-2. **Work** – dispatch one `revenue-diy:worker` per unit – **`Worker (<model>): <one-line task>`** – `{brief, task:[unit <n> of the Execution section], progress:[<phase>_work_<n>]}`.
+2. **Work** – dispatch one `revenue-diy:worker` per unit – **`Worker (<model>): <one-line task>`** – `{brief, task:[unit <n> of the Execution section], progress:[<phase>_work_<n>], context_files:[the modules the plan names for this piece]}`.
 3. **Read the outcome** – every agent ends on **done**, **done with concerns** or **blocked**. Done → verify against the sub-brief's done criteria and fact-check against the business context; never accept a pass claim without the observed output. Done with concerns → a concern that touches an acceptance line is a finding. Blocked → give it what it names and resume it, or ask the user when only they can.
-4. **Review** – *IF the Reviews answer includes per-phase review* → `revenue-diy:reviewer` – **`Reviewer (<model>): <phase>`** – `{brief, task:[the Review section, which names the target and rubric], review:[<phase>_review]}`.
+4. **Review** – *IF the Reviews answer includes per-phase review* → `revenue-diy:reviewer` – **`Reviewer (<model>): <phase>`** – `{brief, task:[the Review section, which names the target and rubric], review:[<phase>_review], context_files:[the modules its rubric rests on]}`.
 5. **Route findings** – per execution rule 7.
 6. **Record** – put each report in `<worklog>` as it lands. A phase is not closed, and nothing that waits on it is dispatched, until its reports are there.
 7. **Progress write** – per execution rule 5, for every work item in the phase.
@@ -201,7 +208,7 @@ The agents route runs here.
 
 ✅ Every work item implemented and verified against its acceptance lines (evidence read)?
 ✅ Every work item closed with an evidence line – its `progress:` key `true` where the brief is open?
-✅ Every agent report in `<worklog>`; every finding fixed, or asked about after three failed rounds?
+✅ Every agent report in `<worklog>`; every finding fixed or routed as `workflows/acceptance-review.md` § ROUTE FINDINGS sets, or asked about after three failed rounds?
 ✅ Output grounded in the business context where the connector is present – no generic filler?
 
 ---
@@ -220,9 +227,9 @@ READ `workflows/acceptance-review.md` and `assets/checklist.md` NOW – NEVER sk
 
 ### 4.2 INDEPENDENT REVIEW
 
-The final reviewer: default model sonnet; rubric `assets/checklist.md`, plus another skill's `assets/checklist.md` by stable path when the output clearly belongs to its domain; announce noun `<output>`.
+The final reviewer: by default the model matrix's review rows, their model and effort; rubric `assets/checklist.md`, plus another skill's `assets/checklist.md` by stable path when the output clearly belongs to its domain; announce noun `<output>`.
 
-**An edit after the final review re-runs it** – any change to the output after the final review, by a worker or by you, runs the final review again before the report. A fix-then-re-run loop runs at most two re-runs, and a new P3 a re-run raises is reported, not fixed again.
+**An edit after the final review** – any change to the output after it, by a worker or by you, is routed as `workflows/acceptance-review.md` § ROUTE FINDINGS sets, before the report.
 
 **Your own integrated review is a file** – full route: after the last independent review and its fixes, write `review_integrated` in `<scratch>` (`workflows/acceptance-review.md § RECORD THE REVIEW`) – seams, consistency, the decision-distribution table, and the checklist re-ticked after any later fix. A passed final review never replaces it; the report waits for it.
 
@@ -237,9 +244,9 @@ The final reviewer: default model sonnet; rubric `assets/checklist.md`, plus ano
 
 Goal: **hand off, close the run, capture what should outlive the session.** Runs on EVERY task – `simple task` and a one-turn answer included; with no brief open, the brief and `<worklog>` steps fall away and the report and the closing call remain.
 
-### 5.1 FINALISE
+### 5.1 FINALISE DOCUMENTATION
 
-1. Finish documentation per the conventions `OPERATIONS.md` points at; *IF it touches more than 2 files* → `revenue-diy:worker` – **`Worker (<model>): documentation`** – `{brief:[the work-log item, or brief.md], task:[the documentation the plan names], progress:[final_docs]}`.
+1. Finish documentation per the conventions `OPERATIONS.md` points at; *IF it touches more than 2 files* → `revenue-diy:worker` – **`Worker (<model>): documentation`** – `{brief:[the work-log item, or brief.md], task:[the documentation the plan names], progress:[final_docs], context_files:[the documentation module the index lists]}`.
 2. **The final report** – write the `§ REPORT TO USER` text to a new report in `<scratch>` named `final_summary` and put it in `<worklog>`, with any report in `<scratch>` not yet there.
 3. **An open item stops the wrap-up** – *IF the last acceptance checklist has an open item* → fix what can be fixed now (GO back to `§ STEP 3: EXECUTE`); whatever is still open is named in the report and in `<worklog>`; the work-log item, where one exists, stays open, and the brief, where open, stays `in_progress`. *ELSE* → where the brief is open, set its `status: completed`.
 4. **Close the work-log item** – *IF `<worklog>` is a work log and holds an item for this run* → close it as `OPERATIONS.md` instructs.
@@ -247,15 +254,15 @@ Goal: **hand off, close the run, capture what should outlive the session.** Runs
 
 ### 5.2 REPORT TO USER
 
-One message, the four parts under their own headings, never a one-line summary: **Work done** (highlights, problems) · **Review results** (verdicts, fix loops, the acceptance checklist's verdict) · **Output** (links) · **Follow-ups** (open acceptance items first; P3s, improvements, open questions). It comes right before the closing call in `§ FEEDBACK`.
+One message, printed in the reply – a saved report is its record, never its delivery – the four parts under their own headings, never a one-line summary: **Work done** (highlights, problems) · **Review results** (verdicts, fix loops, the acceptance checklist's verdict) · **Output** (links) · **Follow-ups** (open acceptance items first; improvements, open questions). It comes right before the closing call in `§ CAPTURE FEEDBACK`.
 
-### 5.3 FEEDBACK
+### 5.3 CAPTURE FEEDBACK
 
-In the SAME message, after the report text, run `workflows/compound-knowledge.md § PART 2: AFTER THE REPORT – SAME MESSAGE`: its one call to your question tool – the save questions, then the rating – is the last of the session; never a prose ask.
+In the SAME message, after the report text, run `workflows/compound-knowledge.md § PART 2: AFTER THE REPORT – SAME MESSAGE`: its one call to your question tool – the save questions, any workspace question, then the rating – is the last of the session; never a prose ask.
 
 ### WRAP-UP STAGE QUALITY GATES
 
 ✅ Documentation final; the brief, where open, `completed` – or `in_progress` with every open acceptance item named; the work-log item, where one exists, closed as `OPERATIONS.md` instructs, or left open saying what is open?
 ✅ The final report and every other report in `<scratch>` in `<worklog>`?
-✅ The four-part report delivered, then the closing question-tool call – never a prose ask (the connector absent → the skip line, no dialog)?
+✅ The four-part report printed in the reply, then the closing question-tool call – never a prose ask (the connector absent → the skip line, no dialog)?
 ✅ `workflows/compound-knowledge.md` run in full, or its skip line printed?

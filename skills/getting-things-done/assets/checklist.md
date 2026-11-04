@@ -1,6 +1,6 @@
 # GETTING-THINGS-DONE – ACCEPTANCE CRITERIA
 
-> **Version 0.12** | 2026-10-15
+> **Version 0.13** | 2026-10-21
 
 What GOOD output looks like for any task run through `getting-things-done`. Every line is pass/fail WITH EVIDENCE – the judge quotes the output (or states "none found" after checking), never scores on impression. Dual-consumer: the skill's own `§ STEP 4: REVIEW` scores real output against it AND eval graders score test output against it.
 
@@ -11,5 +11,5 @@ What GOOD output looks like for any task run through `getting-things-done`. Ever
 5. **Trade-offs surfaced, not buried** – where the task involved a decision, options carry honest trade-offs and a clear recommendation; a not-worth-doing verdict is stated plainly when reached. Evidence: quote the recommendation line.
 6. **Output landed where agreed** – delivered at the `Output` design input's location (tool > file > response block), not scattered. Evidence: the landing path/location.
 7. **Session opened with STEP 0** – the connector check came first: with the connector present the opening `get_context` carried `skill` and `start: true`; absent, the single fixed line was printed. Then, where a brief is due – the task needs a question to the user, runs past one turn, or sends out an agent – `brief.md` was created in `<scratch>` (with `connector`, `scratch`, `worklog`, `log`, `steps` and `progress` keys) before the reply that needs it; a task done in one turn from the user's own words has none, and the context load still came before any prose. Evidence: quote the call (or the line) and the brief header (or "no brief due" with the reason), in the order they happened.
-8. **Report preceded the feedback dialog** – the full report text reached the user BEFORE the one call to the question tool (per-candidate save questions, then the rating), in the same turn; any Save was filed via `submit_context`; with the connector absent the skip line printed and no dialog followed. Evidence: quote the report's closing line and the call or the skip line that follows it.
+8. **Report preceded the feedback dialog** – the full report text reached the user BEFORE the one call to the question tool (per-candidate save questions, any workspace question, then the rating), in the same turn; any Save was filed via `submit_context`; with the connector absent the skip line printed and no dialog followed. Evidence: quote the report's closing line and the call or the skip line that follows it.
 9. **Decisions carried into the brief** *(tasks with a brief)* – the brief restates every decision in full under its stable `D<n>` ID, its `progress:` frontmatter carries one flat key per work item, and every plan item names the D-IDs it implements. Evidence: quote the DECISIONS heading, two restated IDs and one item's ID list (`simple task`: "not applicable").

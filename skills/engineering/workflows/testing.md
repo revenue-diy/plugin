@@ -1,6 +1,6 @@
 # TESTING WORKFLOW
 
-> **Version 2.6** | 2026-10-12
+> **Version 2.10** | 2026-10-28
 
 Loaded by `engineering` for per-phase tests (EXECUTE, dispatched), the end-to-end test (REVIEW) and `test` mode. Testing gathers EVIDENCE against the test plan – a validator passing is never proof; observation is.
 
@@ -66,9 +66,9 @@ srv.listen(0,'127.0.0.1',()=>{fs.writeFileSync(path.join(__dirname,'serve.port')
 
 ### Dispatched runs (default – per-phase and end to end)
 
-Write the scenarios to `<scratch>/scenarios_<scope>.md` (each case: pre-conditions, steps, expected observation, cleanup). DISPATCH `revenue-diy:tester` under the announce string the calling step names, with the `brief`, `task` and `progress` it names, plus `scenarios:[<scratch>/scenarios_<scope>.md]`, `conventions:[a repo or project testing-conventions document, if one exists – never a context module]` and `context_files:[the context module carrying the testing conventions, if the index lists one]`. Browser scenarios go in ONE dispatch run serially; scriptable cases split freely.
+Write the scenarios to `<scratch>/scenarios_<scope>.md` (each case: pre-conditions, steps, expected observation, cleanup). DISPATCH `revenue-diy:tester` under the announce string the calling step names, with the fields it names – its `context_files` slot included – plus `scenarios:[<scratch>/scenarios_<scope>.md]` and `conventions:[a repo or project testing-conventions document, if one exists – never a context module]`. Browser scenarios go in ONE dispatch run serially; scriptable cases split freely.
 
-**Then YOU read the evidence** – every verdict against its captured observation. "Worked as expected" is a FAIL to re-run. FAIL findings → back to the SAME worker that built the item, resumed by you so it fixes with the context it holds (a new `worker` only when the fix will not fit in the room left in it; main-thread work is fixed main-thread); then re-run the failed cases with a NEW `progress` path (`<scope>_test_<k>`), never over a finished report. A run killed mid-way is re-dispatched on its SAME path, and the tester resumes the unrun scenarios.
+**Then YOU read the evidence** – every verdict against its captured observation. "Worked as expected" is a FAIL to re-run. FAIL findings → back to the SAME worker that built the item, resumed by you so it fixes with the context it holds (only while its fix rounds, this one included, fit inside the room `workflows/plan.md` § 5 item 3 leaves for fix rounds – otherwise a fresh `worker`, with the same brief and report path; main-thread work is fixed main-thread); then re-run the failed cases with a NEW `progress` path (`<scope>_test_<k>`), never over a finished report. A run killed mid-way is re-dispatched on its SAME path, and the tester resumes the unrun scenarios.
 
 ### Main-thread runs
 

@@ -6,8 +6,8 @@ tier: light
 status: built
 origin: baseline
 license: "Copyright Revenue DIY Ltd. Licensed under PolyForm Shield 1.0.0 – see LICENSE.txt in this folder. Use and adapt it for your own business; do not sell it or use it to provide a competing product."
-version: "0.9"
-generated: { at: "2026-10-19T04:03:29+01:00" }
+version: "0.12"
+generated: { at: "2026-10-29T03:17:00+00:00" }
 type: skill
 ---
 
@@ -212,7 +212,7 @@ The scan log, and the change log where the user's draft was refined, go out with
 
 Goal: **hand off, close the run, capture what should outlive the session.** Order is mechanical.
 
-### 5.1 FINALISE
+### 5.1 FINALISE DOCUMENTATION
 
 1. **Confirm the landing** – the last version handed over is at its `Output` landing; never sent or published.
 2. **An open item stops the wrap-up** – *IF the last acceptance checklist has an open item* → fix what can be fixed now (GO back to `§ STEP 3: EXECUTE`); whatever is still open is named in the report and in `<worklog>`; the work-log item, where one exists, stays open, and the brief, where open, stays `in_progress`. *ELSE* → where the brief is open, set its `status: completed`.
@@ -223,7 +223,7 @@ Goal: **hand off, close the run, capture what should outlive the session.** Orde
 
 One message: **output** first – the final text, ready to copy, when the reply is its home, else where it landed · **work done** (problems) · **review results** (the last scan log's verdict, the feedback rounds, the acceptance checklist's verdict) · **follow-ups** (open acceptance items first; every `[SOURCE NEEDED]`; an image prompt, where the piece will carry an image and none was made; then, only where the piece clearly feeds a bigger job, ONE dismissable line naming its skill – `managing-content` to plan what to write next, `designing-landing-pages` for its page, `building-campaigns` for a sequence – handing over the piece as a file, never calling that skill).
 
-### 5.3 FEEDBACK
+### 5.3 CAPTURE FEEDBACK
 
 In the SAME message, after the report text, run `workflows/compound-knowledge.md § PART 2: AFTER THE REPORT – SAME MESSAGE`: its one call to your question tool is the last of the session.
 

@@ -1,6 +1,6 @@
 # DESIGN INTERVIEW
 
-> **Version 1.2** | 2026-10-16
+> **Version 1.9** | 2026-11-04
 
 The design method every skill shares. Read in full at the skill's DESIGN step when a MUST-HAVE design input is still open; when every one is already answered, the skill records design clear and skips this file. The skill's DESIGN step owns its design-inputs table and its own read-and-evaluate steps; this file runs after them: research the unknowns, interview the user, lock every input.
 
@@ -13,8 +13,10 @@ The design method every skill shares. Read in full at the skill's DESIGN step wh
 - *IF bounded to known files and no unknowns* → go to `§ INTERVIEW THE USER`.
 - *IF a few targeted reads* → do them yourself.
 - *IF this skill is `tier: light`* → ask the user for the missing facts or research them yourself; a light skill never dispatches.
-- *ELSE* → ONE topic (two if closely aligned) per agent: `revenue-diy:researcher` – **`Researcher (<model>): <topic>`** – `{brief:[the research brief, as text: the topic, what the answers feed, the references to start from and any business fact the questions need], questions:[the research questions, as an array], research:[the full path of a new report in <scratch> named research_<topic>]}` – the questions take the place of `task`. Investigation that needs a shell → `revenue-diy:worker` – **`Worker (<model>): <topic>`** – `{brief:[the same research brief, as text], task:[answer the questions; report only, edit nothing], progress:[the full path of a new report in <scratch> named research_<topic>]}`.
-- **Read every report in full** as it lands. Expect `ANOMALIES NOTICED` and `UNVERIFIED` – an agent that silently fills gaps is reporting fiction; flag single-source claims "unverified". Put each report in `<worklog>` as you read it.
+- *ELSE* → ONE topic (two if closely aligned) per agent, on the Models answer, else the model matrix's research row, its model and effort: `revenue-diy:researcher` – **`Researcher (<model>): <topic>`** – `{brief:[the research brief, as text: the topic, what the answers feed, the references to start from, any business fact the questions need and any access fact the pages need that the context records], questions:[the research questions, as an array], research:[the full path of a new report in <scratch> named research_<topic>], context_files:[]}` – the questions take the place of `task`, and the researcher loads nothing, so every fact it needs is in its brief. Investigation that needs a shell → `revenue-diy:worker` – **`Worker (<model>): <topic>`** – `{brief:[the same research brief, as text], task:[answer the questions; cite the link for each outside fact, and mark one that only a single page carries "(single source)", unless it is that party's official, primary page for a fact that party itself sets or defines (its own prices, plans and specs; a law's own text); report only, edit nothing], progress:[the full path of a new report in <scratch> named research_<topic>], context_files:[the convention modules the investigated system follows, or none]}`.
+- **Read every report in full** as it lands. Expect `ANOMALIES NOTICED` and `UNVERIFIED` – an agent that silently fills gaps is reporting fiction; carry every claim a report marks "(single source)" as unverified. Put each report in `<worklog>` as you read it.
+
+Whenever you research yourself, through the targeted reads or a light skill's own research: cite the link for each fact you look up, and mark a fact only one page carries "unverified", unless it is that party's official, primary page for a fact that party itself sets or defines (its own prices, plans and specs; a law's own text).
 
 ---
 
@@ -29,17 +31,17 @@ The design method every skill shares. Read in full at the skill's DESIGN step wh
     | 2 | [a choice that row 1 settles] | detailed | 1 | open |
 
     `structural` = what is built, its boundary, who owns it, where it lives, what surface it targets. `detailed` = every choice the structural rows settle. EVERY `structural` row is numbered BEFORE every `detailed` row; a `detailed` row's `depends on` names a `structural` row, never another detailed one, and the row NEVER opens until that parent reads `LOCKED`. The row count is the `<N>` in rule 3.
-3. **One topic per reply, fixed shape** – every interview turn is exactly this and nothing else:
+3. **One topic per reply, fixed shape** – every interview turn is exactly this and nothing else; a topic goes out in full in one reply, never split across turns:
 
     ```
     Topic <n> of <N>: <topic>
     <the research bearing on THIS topic – at most 5 lines>
-    Recommended: <default> – <the trade-off it accepts>
-    <ONE question>
+    Recommended: <default, settling THIS row only> – <the trade-off it accepts>
+    <every question on what THIS topic's own § AGENDA row names, together – nothing outside it>
     ```
 
-    **A topic's default settles only its own `§ AGENDA` row:** a term a later row holds stays open – at most named as that row's, never set, in the default or the research lines. Beyond such a name, no other topic is mentioned, answered or pre-empted in that reply. *IF the user's message raises several topics at once* → the reply is `§ AGENDA` (structural rows first, one recommended default each) and then Topic 1 – NEVER an answer to each of them.
-4. **Record before the next topic opens** – the moment a topic locks, mint it in the brief's `§ DECISIONS` as `**D<n> (topic)** – text · LOCKED | OPEN` AND flip its `§ AGENDA` row to `LOCKED → D<n> (topic)`, in the SAME turn. IDs never renumber; a reversal is a status change with a note.
+    **A topic's default settles only its own `§ AGENDA` row:** a term a later row holds stays open, even where this row's entry also touches it – at most named as that row's, never set, in the default or the research lines. A fact of the work the default would need that no row names gets no row of its own and is stated in the default as its assumption: nothing invented that the user, the files or the context did not give, and nothing stated against what they show. Neither is asked in that reply: to name or state is a plain sentence; a question, or an invitation to confirm, supply, correct, check or choose, asks. Beyond such a name, no other topic is mentioned, asked, answered or pre-empted in that reply. *IF the user's message raises several topics at once* → the reply is `§ AGENDA` (structural rows first, one recommended default each) and then Topic 1 – NEVER an answer to each of them.
+4. **Record before the next topic opens** – the moment a topic locks, mint it in the brief's `§ DECISIONS` as `**D<n> (topic)** – text · LOCKED` AND flip its `§ AGENDA` row to `LOCKED → D<n> (topic)`, in the SAME turn. No D-ID before a topic locks: its row stays `open`. IDs never renumber; a reversal keeps its D-ID, marked `· REOPENED – <note>`, and its row reads `open` until it locks again.
 5. **Work the rows in order** – structural before detailed, `MUST-HAVE` before `NICE-TO-HAVE`; then list the `NICE-TO-HAVE` defaults and ask whether any needs discussion.
 6. **A topic raised late** (mid-interview, at PLAN, during EXECUTE) → ADD it to `§ AGENDA` IN CLASS ORDER, classed, with its dependants noted: a late `structural` topic is numbered INTO the structural block and the rows under it shift down. Take it under rule 3 at the next natural pause, one topic per turn, recorded before the next opens. Work already in flight is never re-cut mid-turn.
 
